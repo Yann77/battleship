@@ -10,7 +10,9 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.team.apps.game.GameController;
+import org.team.apps.game.GameRepository;
 import org.team.apps.game.GameService;
+import org.team.apps.user.UserRepository;
 
 @Configuration
 @ConfigurationProperties
@@ -33,9 +35,10 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
         registry.addEndpoint(properties.getEndpoint()).setAllowedOrigins(properties.getAllowedOrigins()).withSockJS();
     }
 
+
     @Bean
-    GameService gameService() {
-        return new GameService();
+    GameService gameService(GameRepository gameRepository, UserRepository userRepository) {
+        return new GameService(gameRepository, userRepository);
     }
 
     @Bean

@@ -9,8 +9,9 @@ public class GameService {
     private GameRepository gameRepository;
     private UserRepository userRepository;
 
-    public GameService(GameRepository gameRepository) {
+    public GameService(GameRepository gameRepository, UserRepository userRepository) {
         this.gameRepository = gameRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Game> create(String username) {
