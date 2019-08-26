@@ -1,0 +1,32 @@
+# SCM 
+**/.jazzignore
+**/.cvsignore
+
+# Eclipse
+**/.settings/
+**/.project
+**/.classpath
+**/.apt_generated
+**/.metadata
+**/.factorypath
+
+# Java
+**/*.class
+**/MANIFEST.MF
+
+# Maven
+**/target/
+
+# C# / VisualStudio
+**/obj/
+**/bin/
+
+# MacOS
+**/.DS_Store
+
+# Misc
+**/build/
+
+# Netbeans
+**/nbactions.xml
+**/nb-configuration.xml
