@@ -3,10 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BoardComponent } from './board/board.component';
+import { CreateOrJoinComponent } from './create-or-join/create-or-join.component';
+import { InitBoardComponent } from './init-board/init-board.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BoardComponent,
+    CreateOrJoinComponent,
+    InitBoardComponent
   ],
   imports: [
     BrowserModule,
