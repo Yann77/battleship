@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeoutException;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -34,8 +35,8 @@ class GameControllerTest {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/live";
-    static final String WEBSOCKET_TOPIC  = "/topic/game/created";
-    static final String WEBSOCKET_TOPIC_SEND = "/topic/game/create";
+    static final String WEBSOCKET_TOPIC  = "/topic";
+    static final String WEBSOCKET_TOPIC_SEND = "/topic";
 
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;
@@ -59,7 +60,10 @@ class GameControllerTest {
         String message = "MESSAGE TEST";
         session.send(WEBSOCKET_TOPIC_SEND, message.getBytes());
 
-        //Assert.assertEquals(message, blockingQueue.poll(1, SECONDS));
+        String msg = blockingQueue.poll(10, SECONDS);
+
+        Assertions.assertEquals(message, msg);
+        System.out.println(msg);
     }
 
     class DefaultStompFrameHandler implements StompFrameHandler {

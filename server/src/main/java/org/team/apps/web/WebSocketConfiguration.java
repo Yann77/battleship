@@ -25,15 +25,15 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker(properties.getTopicPrefix());
-        registry.setApplicationDestinationPrefixes(properties.getApplicationPrefix());
+        registry.enableSimpleBroker("/topic");
+        registry.setApplicationDestinationPrefixes("/app");
     }
 
 
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint(properties.getEndpoint()).setAllowedOrigins(properties.getAllowedOrigins()).withSockJS();
+        registry.addEndpoint("/live").setAllowedOrigins("*").withSockJS();
     }
 
 
