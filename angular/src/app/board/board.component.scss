@@ -1,0 +1,27 @@
+.battleground-container{
+  display: flex;
+  flex-direction: row;
+  max-width: 520px;
+  max-height: 520px;
+}
+
+.tile{
+  position: relative;
+  box-sizing: border-box;
+  margin: 1px;
+  height: 50px;
+  width: 50px;
+}
+
+.gif{
+  height: 50px;
+  width: 50px;
+}
+
+.submarine{
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  height: 50px;
+  width: 50px;
+}

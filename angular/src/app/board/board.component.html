@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="battleground-container">
+    <div class="row" *ngFor="let row of boardCells; index as rowIndex">
+      <div class="col" *ngFor="let cell of boardCells[rowIndex]; index as colIndex">
+        <!-- <div class="boardCell">{{rowIndex}}, {{colIndex}}</div> -->
+        <div class="tile">
+          <img *ngIf="rowIndex < 5" class="submarine" src="../assets/images/blue_submarine.gif">
+          <img *ngIf="rowIndex >= 5" class="submarine" src="../assets/images/orange_submarine.gif">
+          <img class="gif" src="../assets/images/water_tile.gif">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

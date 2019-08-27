@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// https://getbootstrap.com/docs/4.0/utilities/spacing/
+
+$p-1: 4px;
+$p-2: 8px;
+$p-3: 16px;
+$p-4: 24px;
+$p-5: 32px;
+$p-6: 40px;
+$p-7: 48px;
+$p-8: 56px;
+
+$spacer: 16px;;
+$spacers: (
+5: $spacer + 16,
+6: $spacer + 24,
+7: $spacer + 32,
+8: $spacer + 40,
+9: $spacer + 48,
+10: $spacer + 56,
+11: $spacer + 64,
+12: $spacer + 72,
+13: $spacer + 80,
+14: $spacer + 88,
+15: $spacer + 96,
+16: $spacer + 104,
+17: $spacer + 112,
+18: $spacer + 120,
+20: $spacer + 128,
+21: $spacer + 136,
+22: $spacer + 144,
+23: $spacer + 152,
+24: $spacer + 160
+);
+
+$grid-gutter-width: 16px;
+$grid-breakpoints: (
+xs: 0,
+lg: 960px
+);
+$container-max-widths: ();
+app-root,
+.cdk-overlay-container {
+  @import '../node_modules/bootstrap/scss/bootstrap-grid';
+  @import '../node_modules/bootstrap/scss/utilities/_sizing';
+  @import '../node_modules/bootstrap/scss/utilities/_borders';
+  @import '../node_modules/bootstrap/scss/mixins/_hover';
+  @import '../node_modules/bootstrap/scss/mixins/_text-truncate';
+  @import '../node_modules/bootstrap/scss/mixins/_text-emphasis';
+  @import '../node_modules/bootstrap/scss/mixins/_deprecate';
+  @import '../node_modules/bootstrap/scss/mixins/_text-hide';
+  @import '../node_modules/bootstrap/scss/utilities/_text';
+}
+/* https://github.com/twbs/bootstrap/issues/24219 */
+.row:before,
+.row:after {
+  display: inline-block;
+}
+/* https://github.com/twbs/bootstrap/issues/24219 */
+.row:before,
+.row:after {
+  display: inline-block;
+}
