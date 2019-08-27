@@ -1,5 +1,5 @@
 # Intellij
 **/*.iml
-/.idea/**
+/.idea
 **/.editorconfig
 
