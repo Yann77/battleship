@@ -13,8 +13,9 @@ public class GameController {
     private GameService gameService;
 
     @MessageMapping("/game/create")
-    @SendTo("/topic/game/created")
+    @SendTo("/game/created")
     public List<Game> create(String username) {
+        System.out.println("je suis ici");
         return gameService.create(username);
     }
 

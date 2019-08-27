@@ -1,6 +1,5 @@
 package org.team.apps.web;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("app.websocket")
