@@ -1,14 +1,14 @@
 <div class="game-container p-3">
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <input id="PlayerName"
+      <input id="username"
              type="text" matInput
              placeholder="Player Name"
-             formControlName="playerName"
+             formControlName="username"
              class="form-control"
-             [ngClass]="{ 'is-invalid': submitted && registerForm.controls.playerName.errors }"/>
-      <mat-error *ngIf="submitted && registerForm.controls.playerName.errors" class="invalid-feedback">
-        <div *ngIf="registerForm.controls.playerName.errors.required">Player name is required</div>
+             [ngClass]="{ 'is-invalid': submitted && registerForm.controls.username.errors }"/>
+      <mat-error *ngIf="submitted && registerForm.controls.username.errors" class="invalid-feedback">
+        <div *ngIf="registerForm.controls.username.errors.required">Player name is required</div>
       </mat-error>
     </mat-form-field>
 
@@ -31,13 +31,13 @@
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element"> Game #{{element.id}} </td>
           </ng-container>
 
           <!-- Description Column -->
           <ng-container matColumnDef="players">
             <th mat-header-cell *matHeaderCellDef> Players </th>
-            <td mat-cell *matCellDef="let element"> {{element.players.join(', ')}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.host.name}}{{element.guest ? ' vs ' + element.guest.name : ''}} </td>
           </ng-container>
 
           <!-- Description Column -->

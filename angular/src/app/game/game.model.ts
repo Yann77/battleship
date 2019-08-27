@@ -5,9 +5,21 @@ export enum GameStatus {
 }
 
 export interface Game {
+  id: number;
   status: GameStatus;
   name: string;
-  players: Array<string>;
+  host: Player;
+  guest?: Player;
   description: string;
-  gameDt: Date;
+  gameDt?: Date;
 }
+
+export interface Player {
+  id: number;
+  name: string;
+}
+
+export interface GameInputMessage {
+  username: string;
+}
+

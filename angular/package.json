@@ -21,8 +21,10 @@
     "@angular/platform-browser": "~8.2.0",
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
+    "@stomp/stompjs": "^4.0.7",
     "bootstrap": "^4.3.1",
     "rxjs": "~6.4.0",
+    "sockjs-client": "^1.1.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },
