@@ -16,12 +16,10 @@ import org.team.apps.user.UserRepository;
 
 @Configuration
 @EnableWebSocketMessageBroker
-@EnableConfigurationProperties(WebSocketProperties.class)
 @AllArgsConstructor
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-	@Autowired
-    private WebSocketProperties properties;
+
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
@@ -42,8 +40,4 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
         return new GameService(gameRepository, userRepository);
     }
 
-    @Bean
-    GameController gameController(GameService gameService) {
-        return new GameController(gameService);
-    }
 }

@@ -14,16 +14,18 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    @Column(name = "game_id")
+    @Column(name = "id")
     private Integer gameId;
 
-    @JoinColumn(name = "host", referencedColumnName="user_id")
+    @JoinColumn(name = "host", referencedColumnName="id")
     @OneToOne
     private User host;
 
-    @JoinColumn(name = "guest", referencedColumnName="user_id")
+    @JoinColumn(name = "guest", referencedColumnName="id")
     @OneToOne
     private User guest;
+
+    private String status;
 
     public Integer getGameId() {
         return gameId;
@@ -47,5 +49,13 @@ public class Game {
 
     public void setGuest(User guest) {
         this.guest = guest;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

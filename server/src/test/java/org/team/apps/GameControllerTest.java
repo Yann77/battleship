@@ -35,8 +35,8 @@ class GameControllerTest {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     static final String WEBSOCKET_URI = "ws://localhost:8080/live";
-    static final String WEBSOCKET_TOPIC  = "/topic";
-    static final String WEBSOCKET_TOPIC_SEND = "/topic";
+    static final String WEBSOCKET_TOPIC  = "/topic/game/created";
+    static final String WEBSOCKET_TOPIC_SEND = "/app/game/create";
 
     BlockingQueue<String> blockingQueue;
     WebSocketStompClient stompClient;

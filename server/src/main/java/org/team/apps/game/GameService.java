@@ -15,14 +15,19 @@ public class GameService {
     }
 
     public List<Game> create(String username) {
-        User user = new User();
-        user.setUsername(username);
-        userRepository.save(user);
+        try {
+            User user = new User();
+            user.setUsername(username);
+            userRepository.save(user);
 
-        Game game = new Game();
-        game.setHost(user);
-        gameRepository.save(game);
+            Game game = new Game();
+            game.setHost(user);
+            gameRepository.save(game);
 
-        return gameRepository.findAll();
+            return gameRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e);
+            throw e;
+        }
     }
 }
