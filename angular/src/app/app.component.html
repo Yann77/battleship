@@ -1,10 +1,10 @@
-<section class="header">
-  <h1>BattleShip GAME</h1>
-  <nav>
-    <a routerLink="/games">Games</a>
-    <a routerLink="/init-board">Init your boards</a>
+<section class="header align-items-end">
+  <img src="../assets/images/battleship.jpeg" alt="BattleShip logo" class="game-logo"/>
+  <nav class="links" mat-tab-nav-bar>
+    <a mat-tab-link routerLink="/games">Games</a>
+    <a mat-tab-link routerLink="/init-board">Init your boards</a>
   </nav>
 </section>
-<router-outlet class="main w-100"></router-outlet>
+<router-outlet class="main"></router-outlet>
 
 
