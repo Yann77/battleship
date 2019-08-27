@@ -3,7 +3,6 @@ package org.team.apps.web;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Data
 @ConfigurationProperties("app.websocket")
 public class WebSocketProperties {
     /**
@@ -22,4 +21,36 @@ public class WebSocketProperties {
      * Allowed origins
      */
     private String[] allowedOrigins = new String[0];
+
+	public String getApplicationPrefix() {
+		return applicationPrefix;
+	}
+
+	public void setApplicationPrefix(final String applicationPrefix) {
+		this.applicationPrefix = applicationPrefix;
+	}
+
+	public String getTopicPrefix() {
+		return topicPrefix;
+	}
+
+	public void setTopicPrefix(final String topicPrefix) {
+		this.topicPrefix = topicPrefix;
+	}
+
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(final String endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public String[] getAllowedOrigins() {
+		return allowedOrigins;
+	}
+
+	public void setAllowedOrigins(final String[] allowedOrigins) {
+		this.allowedOrigins = allowedOrigins;
+	}
 }

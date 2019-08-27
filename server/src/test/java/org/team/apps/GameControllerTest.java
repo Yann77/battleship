@@ -1,15 +1,15 @@
 package org.team.apps;
 
 import java.lang.reflect.Type;
-import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.team.apps.game.Game;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaders;
@@ -18,11 +18,8 @@ import org.springframework.messaging.simp.stomp.StompSessionHandler;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
-import org.team.apps.game.Game;
-import org.team.apps.web.WebSocketConfiguration;
 
-@SpringBootTest
-@Import(WebSocketConfiguration.class)
+@SpringBootTest(classes=SpringBootWebsocketsApiApplication.class)
 class GameControllerTest {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -33,7 +30,7 @@ class GameControllerTest {
         WebSocketStompClient stompClient = new WebSocketStompClient(client);
         stompClient.setMessageConverter(new MappingJackson2MessageConverter());
         StompSessionHandler sessionHandler = new MyStompSessionHandler();
-        stompClient.connect("ws://localhost:8080", sessionHandler);
+        stompClient.connect("ws://localhost:8080/live", sessionHandler);
         new Scanner(System.in).nextLine();
     }
 

@@ -1,6 +1,8 @@
 package org.team.apps.web;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +17,12 @@ import org.team.apps.game.GameService;
 import org.team.apps.user.UserRepository;
 
 @Configuration
-@ConfigurationProperties
 @EnableWebSocketMessageBroker
 @EnableConfigurationProperties(WebSocketProperties.class)
 @AllArgsConstructor
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-
+	@Autowired
     private WebSocketProperties properties;
 
     @Override
@@ -29,6 +30,8 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
         registry.enableSimpleBroker(properties.getTopicPrefix());
         registry.setApplicationDestinationPrefixes(properties.getApplicationPrefix());
     }
+
+
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {

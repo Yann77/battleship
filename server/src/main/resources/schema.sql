@@ -1,5 +1,5 @@
-drop table game;
-drop table user;
+--drop table game;
+--drop table user;
 
 create table game (
     game_id     integer identity primary key,
