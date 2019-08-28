@@ -5,7 +5,7 @@ export enum GameStatus {
 }
 
 export interface Game {
-  id: number;
+  gameId: number;
   status: GameStatus;
   name?: string;
   host: Player;
@@ -15,8 +15,8 @@ export interface Game {
 }
 
 export interface Player {
-  id: number;
-  name: string;
+  userId: number;
+  username: string;
 }
 
 export interface GameInputMessage {

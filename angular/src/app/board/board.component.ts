@@ -19,9 +19,9 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for(let i: number = 0; i < this.matrixSize; i++) {
+    for (let i = 0; i < this.matrixSize; i++) {
       this.boardCells[i] = [];
-      for(let j: number = 0; j< 10; j++) {
+      for (let j = 0; j < this.matrixSize; j++) {
         this.boardCells[i][j] = new BoardCell(i, j);
       }
     }

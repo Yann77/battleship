@@ -9,7 +9,7 @@ import {
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule,
+  MatInputModule, MatMenuModule,
   MatTableModule,
   MatTabsModule
 } from '@angular/material';
@@ -36,7 +36,8 @@ import {CoreModule} from './core/core.module';
     MatInputModule,
     MatTableModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,6 +13,14 @@ export class SocketClientService implements OnDestroy {
   private client: Client;
   private state: BehaviorSubject<SocketClientState>;
 
+  static jsonHandler(message: Message): any {
+    return JSON.parse(message.body);
+  }
+
+  static textHandler(message: Message): string {
+    return message.body;
+  }
+
   constructor() {
     this.client = over(new SockJS(environment.api));
     this.state = new BehaviorSubject<SocketClientState>(SocketClientState.ATTEMPTING);
@@ -52,13 +60,5 @@ export class SocketClientService implements OnDestroy {
     this.connect()
       .pipe(first())
       .subscribe(inst => inst.send(topic, {}, JSON.stringify(payload)));
-  }
-
-  static jsonHandler(message: Message): any {
-    return JSON.parse(message.body);
-  }
-
-  static textHandler(message: Message): string {
-    return message.body;
   }
 }
