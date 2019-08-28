@@ -25,3 +25,22 @@
   height: 50px;
   width: 50px;
 }
+.tile {
+  overflow-x: visible;
+  .sub_horizontal {
+    position: absolute;
+    left: 5px;
+    z-index: 100;
+    height: 50px;
+    width: 150px;
+    background-image: url('../../assets/images/sub_horizontal.png');
+  }
+  .cruiser_horizontal {
+    position: absolute;
+    left: 5px;
+    z-index: 100;
+    height: 50px;
+    width: 200px;
+    background-image: url('../../assets/images/croiseur_horizontal.png');
+  }
+}

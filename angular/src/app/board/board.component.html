@@ -4,19 +4,23 @@
       <div class="col" *ngFor="let cell of boardCells[rowIndex]; index as colIndex">
         <!-- <div class="boardCell">{{rowIndex}}, {{colIndex}}</div> -->
         <div class="tile">
-          <img *ngIf="rowIndex < 5" class="submarine" src="../assets/images/blue_submarine.gif">
-          <img *ngIf="rowIndex >= 5" class="submarine" src="../assets/images/orange_submarine.gif">
+          <div *ngIf="rowIndex === 5" [ngClass]="'sub_horizontal'"></div>
+          <div *ngIf="rowIndex === 1" class="cruiser_horizontal"></div>
+          <img *ngIf="rowIndex === 9" class="submarine" src="../assets/images/orange_submarine.gif">
           <img class="gif" src="../assets/images/water_tile.gif">
         </div>
       </div>
     </div>
   </div>
   <div class="ship-container">
+    <img src="../assets/images/blue_submarine.gif">
+    <img src="../assets/images/orange_submarine.gif">
     <img src="../assets/images/sub_horizontal.png">
     <img src="../assets/images/aircraft_carrier_horizontal.png">
     <img src="../assets/images/croiseur_horizontal.png">
     <img src="../assets/images/contre_torpilleur_horizontal.png">
     <img src="../assets/images/explosion.gif">
     <img src="../assets/images/miss_shot.gif">
+    <img class="gif" src="../assets/images/water_tile.gif">
   </div>
 </div>
