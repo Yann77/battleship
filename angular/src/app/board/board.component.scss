@@ -81,4 +81,13 @@
     width: 100px;
     background-image: url('../../assets/images/torpedo_horizontal.png');
   }
+
+  .aircraft_carrier_vertical {
+    position: absolute;
+    left: 0px;
+    z-index: 100;
+    height: 250px;
+    width: 50px;
+    background-image: url('../../assets/images/aircraft_carrier_vertical.png');
+  }
 }

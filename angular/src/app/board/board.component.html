@@ -4,6 +4,7 @@
       <div class="col" *ngFor="let cell of boardCells[rowIndex]; index as colIndex">
         <!-- <div class="boardCell">{{rowIndex}}, {{colIndex}}</div> -->
         <div class="tile">
+          <div *ngIf="rowIndex === 8 && colIndex === 0" class="aircraft_carrier_vertical"></div>
           <div *ngIf="rowIndex === 5" [ngClass]="'sub_horizontal'"></div>
           <div *ngIf="rowIndex === 0" class="shot-missed"></div>
           <div *ngIf="rowIndex === 1" class="cruiser_horizontal"></div>
