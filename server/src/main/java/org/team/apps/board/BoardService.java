@@ -34,23 +34,26 @@ public class BoardService {
     }
 
     private Board createBoard(User user) {
-        List<Cell> cells = createCells();
-
         Board board = new Board();
+        List<Cell> cells = createCells(board);
+
         board.setCellList(cells);
         board.setUser(user);
         return board;
     }
 
 
-    private List<Cell> createCells() {
+    private List<Cell> createCells(Board board) {
         return IntStream.range(1, 10)
                 .mapToObj( i -> {
                     Cell cell = new Cell();
+                    cell.setBoard(board);
                     if (i % 2 == 0) {
                         cell.setCoordinateX(i);
+                        cell.setCoordinateY(1);
                     } else {
                         cell.setCoordinateY(i);
+                        cell.setCoordinateX(1);
                     }
                     return cell;
                 }).collect(Collectors.toList());

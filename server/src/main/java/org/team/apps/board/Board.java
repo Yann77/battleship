@@ -1,15 +1,11 @@
 package org.team.apps.board;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+
 import org.team.apps.user.User;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -20,9 +16,7 @@ public class Board {
     @Column(name = "id")
     private Integer id;
 
-    @OneToMany
-    @JoinColumn(name="board_id", nullable=false)
-//    @JoinColumn(name="board_id", referencedColumnName="id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "board")
     private List<Cell> cellList;
 
     @OneToOne
