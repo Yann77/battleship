@@ -25,3 +25,60 @@
   height: 50px;
   width: 50px;
 }
+
+.explosion{
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  z-index: 200;
+  height: 35px;
+  width: 35px;
+  background-image: url('../../assets/images/explosion.gif');
+}
+.shot-missed{
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  z-index: 200;
+  height: 35px;
+  width: 35px;
+  background-image: url('../../assets/images/miss_shot.gif');
+}
+
+.tile {
+  overflow: visible;
+  .sub_horizontal {
+    position: absolute;
+    left: 5px;
+    z-index: 100;
+    height: 50px;
+    width: 150px;
+    background-image: url('../../assets/images/sub_horizontal.png');
+  }
+  .cruiser_horizontal {
+    position: absolute;
+    left: 5px;
+    z-index: 100;
+    height: 50px;
+    width: 200px;
+    background-image: url('../../assets/images/croiseur_horizontal.png');
+  }
+
+  .destroyer_horizontal {
+    position: absolute;
+    left: 5px;
+    z-index: 100;
+    height: 50px;
+    width: 150px;
+    background-image: url('../../assets/images/destroyer_horizontal.png');
+  }
+
+  .torpedo_horizontal {
+    position: absolute;
+    left: 5px;
+    z-index: 100;
+    height: 50px;
+    width: 100px;
+    background-image: url('../../assets/images/torpedo_horizontal.png');
+  }
+}
