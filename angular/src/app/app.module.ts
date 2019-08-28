@@ -9,12 +9,13 @@ import {
   MatButtonModule,
   MatCardModule,
   MatFormFieldModule, MatIconModule,
-  MatInputModule,
+  MatInputModule, MatMenuModule,
   MatTableModule,
   MatTabsModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
+import {CoreModule} from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {ReactiveFormsModule} from '@angular/forms';
   ],
   imports: [
     AppRoutingModule,
+    CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatTabsModule,
@@ -34,7 +36,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatTableModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
