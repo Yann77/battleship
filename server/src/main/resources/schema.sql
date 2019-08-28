@@ -1,5 +1,7 @@
 drop table game if exists;
 drop table user if exists;
+drop table view if exists;
+drop table cell if exists;
 
 create table game (
     id          integer identity primary key,
@@ -13,10 +15,15 @@ create table user (
 
 create table board (
                       id          integer identity primary key,
+                      user_id     integer,
                       name        varchar(64));
 
+create table view (
+                      board_id    integer,
+                      cord_x      integer,
+                      cord_y      integer);
+
 create table cell (
-                       id          integer identity primary key,
                        board_id    integer,
                        status      varchar(64),
                        type        varchar(1),
@@ -25,3 +32,12 @@ create table cell (
 
 alter table game add foreign key (host) references user(id);
 alter table game add foreign key (guest) references user(id);
+alter table view add foreign key (board_id) references board(id);
+alter table cell add foreign key (board_id) references board(id);
+alter table cell add primary key (board_id, cord_x, cord_y);
+
+
+
+
+
+
