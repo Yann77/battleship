@@ -1,10 +1,6 @@
 package org.team.apps.board;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cell {
@@ -14,8 +10,9 @@ public class Cell {
     @Column(name = "id")
     private Integer id;
 
-//    @Column(name = "board_id")
-//    private Integer boardId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id", nullable = false)
+    private Board board;
 
     private String status;
 
@@ -35,13 +32,13 @@ public class Cell {
         this.id = id;
     }
 
-//    public Integer getBoardId() {
-//        return boardId;
-//    }
-//
-//    public void setBoardId(Integer boardId) {
-//        this.boardId = boardId;
-//    }
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 
     public String getStatus() {
         return status;

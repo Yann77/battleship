@@ -26,7 +26,7 @@ export class GameComponent implements OnInit {
       username: ['', Validators.required]
     });
 
-    this.gameList$ = this.gameService.onGameCreated().pipe(
+    this.gameList$ = this.gameService.findAll().pipe(
       map((games) => {
         return games.map((game) => {
           if (!game.status) {
@@ -67,7 +67,7 @@ export class GameComponent implements OnInit {
   }
 
   onJoining(gameId) {
-    alert('Joining ' + gameId);
+    this.gameService.join(gameId, this.registerForm.value.username);
   }
 
 }

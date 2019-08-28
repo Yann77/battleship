@@ -13,8 +13,11 @@
     </mat-form-field>
 
     <div class="row mb-3">
-      <button mat-raised-button class="ml-2 mr-1">Create Game</button>
-      <button mat-button type="reset" (click)="onReset()">Cancel</button>
+      <button mat-raised-button class="ml-2 mr-1"
+              [disabled]="registerForm.controls.username.errors">Create Game</button>
+      <button mat-button type="reset" (click)="onReset()">
+        Cancel
+      </button>
     </div>
 
     <mat-card>
@@ -74,7 +77,11 @@
 
 <mat-menu #appMenu="matMenu">
   <ng-template matMenuContent let-gameId="gameId">
-    <button mat-menu-item (click)="onJoining(gameId)">Join</button>
+    <button mat-menu-item
+            (click)="onJoining(gameId)"
+            [disabled]="registerForm.controls.username.errors">
+      Join
+    </button>
     <button mat-menu-item>Cancel</button>
   </ng-template>
 </mat-menu>
