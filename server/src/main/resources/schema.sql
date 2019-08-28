@@ -24,7 +24,8 @@ create table view (
                       cord_y      integer);
 
 create table cell (
-                       board_id    integer,
+                       id    integer identity primary key,
+                       board_id     integer,
                        status      varchar(64),
                        type        varchar(1),
                        cord_x      integer,
@@ -34,7 +35,7 @@ alter table game add foreign key (host) references user(id);
 alter table game add foreign key (guest) references user(id);
 alter table view add foreign key (board_id) references board(id);
 alter table cell add foreign key (board_id) references board(id);
-alter table cell add primary key (board_id, cord_x, cord_y);
+
 
 
 

@@ -7,6 +7,6 @@ insert into board values ( 0, 0, 'host_board');
 
 insert into board values ( 1, 1, 'guest_board');
 
-insert into cell values ( 0, 'TEST', 'S', 1, 2);
+insert into cell values ( 0, 1, 'TEST', 'S', 1, 2);
 
 
