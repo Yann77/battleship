@@ -15,9 +15,9 @@ export class GameService {
     this.socketClient.send(`/app/game/create`, game);
   }
 
-  onGameCreated(): Observable<Array<Game>> {
+  findAll(): Observable<Array<Game>> {
     return this.socketClient
-      .onMessage('/topic/game/created')
+      .onMessage('/app/game/get')
       .pipe(map((games: GameOutputMessage) => games.games));
   }
 }
