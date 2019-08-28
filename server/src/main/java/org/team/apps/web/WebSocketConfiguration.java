@@ -9,6 +9,8 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.team.apps.board.BoardRepository;
+import org.team.apps.board.BoardService;
 import org.team.apps.game.GameController;
 import org.team.apps.game.GameRepository;
 import org.team.apps.game.GameService;
@@ -18,7 +20,6 @@ import org.team.apps.user.UserRepository;
 @EnableWebSocketMessageBroker
 @AllArgsConstructor
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
-
 
 
     @Override
@@ -38,6 +39,11 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     @Bean
     GameService gameService(GameRepository gameRepository, UserRepository userRepository) {
         return new GameService(gameRepository, userRepository);
+    }
+
+    @Bean
+    BoardService boardService(BoardRepository boardRepository, UserRepository userRepository) {
+        return new BoardService(boardRepository, userRepository);
     }
 
 }
