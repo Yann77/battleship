@@ -7,9 +7,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.team.apps.board.Board;
 import org.team.apps.game.Game;
 import org.team.apps.game.GameInputMessage;
 import org.team.apps.game.GameOutputMessage;
@@ -83,6 +86,7 @@ public class GameIntegrationTests {
 							joinGame.setGameId(gameOutputMessage.getGames().get(1).getGameId());
 							joinGame.setUsername("SuperUser");
 							session.send("/app/game/join", joinGame);
+							session.send("/app/board/get/" + gameOutputMessage.getGames().get(1).getGuest().getUserId(), null);
 						}
 						catch (Throwable t) {
 							failure.set(t);
@@ -105,6 +109,29 @@ public class GameIntegrationTests {
 						Game currentGame = (Game) payload;
 						try {
 							System.out.println(String.format("Game : %d is hosted by %s and guest %s has joined.", currentGame.getGameId(), currentGame.getHost().getUsername(), currentGame.getGuest().getUsername()));
+						}
+						catch (Throwable t) {
+							failure.set(t);
+						}
+//						finally {
+//							session.disconnect();
+//							latch.countDown();
+//						}
+					}
+				});
+
+				session.subscribe("/topic/board/get", new StompFrameHandler() {
+					@Override
+					public Type getPayloadType(StompHeaders headers) {
+						return Board.class;
+					}
+
+					@Override
+					public void handleFrame(StompHeaders headers, Object payload) {
+						Board currentBoard = (Board) payload;
+						try {
+							Gson gson = new GsonBuilder().create();
+							System.out.println(String.format("board user %s : %s", currentBoard.getUser().getUsername(), gson.toJson(currentBoard)));
 						}
 						catch (Throwable t) {
 							failure.set(t);

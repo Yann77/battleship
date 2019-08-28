@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -31,4 +32,9 @@ public class GameController {
 		return gameService.joinGame(joinGameInputMessage);
 	}
 
+	@SubscribeMapping("/game/get")
+	public GameOutputMessage findAll() {
+		List<Game> games = gameService.findAll();
+		return new GameOutputMessage(games);
+	}
 }

@@ -54,4 +54,8 @@ public class GameService {
 			throw e;
 		}
 	}
+
+	public List<Game> findAll() {
+		return gameRepository.findAll();
+	}
 }
