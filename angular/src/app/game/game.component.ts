@@ -67,7 +67,7 @@ export class GameComponent implements OnInit {
   }
 
   onJoining(gameId) {
-    alert('Joining ' + gameId);
+    this.gameService.join(gameId, this.registerForm.value.username);
   }
 
 }
