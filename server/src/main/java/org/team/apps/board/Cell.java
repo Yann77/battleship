@@ -37,8 +37,6 @@ public class Cell {
         this.id = id;
     }
 
-
-
     public Boolean getTouched() {
         return touched;
     }
@@ -70,4 +68,17 @@ public class Cell {
     public void setCoordinateY(Integer coordinateY) {
         this.coordinateY = coordinateY;
     }
+
+	/**
+	 * Compare the current coordinate of the Cell with those in parameters.
+	 * @param coordinateX
+	 * @param coordinateY
+	 * @return true if equals else false
+	 */
+	public Boolean compareCoordinate(Integer coordinateX, Integer coordinateY){
+		if(coordinateX != null && coordinateY != null){
+			return (coordinateX.equals(this.coordinateX) && coordinateY.equals(this.coordinateY));
+		}
+		 return null;
+	}
 }
