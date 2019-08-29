@@ -86,7 +86,7 @@ public class GameIntegrationTests {
 							joinGame.setGameId(gameOutputMessage.getGames().get(1).getGameId());
 							joinGame.setUsername("SuperUser");
 							session.send("/app/game/join", joinGame);
-							session.send("/app/board/get/" + gameOutputMessage.getGames().get(1).getHost().getUserId(), null);
+							//session.send("/app/board/get/" + gameOutputMessage.getGames().get(1).getHost().getUserId(), null);
 						}
 						catch (Throwable t) {
 							failure.set(t);
@@ -131,20 +131,46 @@ public class GameIntegrationTests {
 						Board currentBoard = (Board) payload;
 						try {
 							Gson gson = new GsonBuilder().create();
-							System.out.println(String.format("board user %s : %s", currentBoard.getUser().getUsername(), gson.toJson(currentBoard)));
+							System.out.println(String.format("board user %s : %s", currentBoard.getUser().getUsername(), currentBoard));
 						}
 						catch (Throwable t) {
 							failure.set(t);
 						}
-						finally {
-							session.disconnect();
-							latch.countDown();
+//						finally {
+//							session.disconnect();
+//							latch.countDown();
+//						}
+					}
+				});
+
+				session.subscribe("/topic/game/get", new StompFrameHandler() {
+					@Override
+					public Type getPayloadType(StompHeaders headers) {
+						return GameOutputMessage.class;
+					}
+
+					@Override
+					public void handleFrame(StompHeaders headers, Object payload) {
+						GameOutputMessage currentgames = (GameOutputMessage) payload;
+						try {
+							System.out.println(String.format("get games size  %d ", currentgames.getGames().size()));
 						}
+						catch (Throwable t) {
+							failure.set(t);
+						}
+//						finally {
+//							session.disconnect();
+//							latch.countDown();
+//						}
 					}
 				});
 
 				try {
 					session.send("/app/game/create", new GameInputMessage("Spring"));
+					JoinGameInputMessage joinGame = new JoinGameInputMessage();
+					joinGame.setGameId(1);
+					joinGame.setUsername("SuperUser");
+					session.send("/app/game/join", joinGame);
 				}
 				catch (Throwable t) {
 					failure.set(t);
