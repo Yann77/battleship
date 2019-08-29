@@ -10,9 +10,6 @@ public class Cell {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id", nullable = false)
-    private Board board;
 
     private String status;
 
@@ -32,13 +29,7 @@ public class Cell {
         this.id = id;
     }
 
-    public Board getBoard() {
-        return board;
-    }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
 
     public String getStatus() {
         return status;

@@ -26,6 +26,7 @@ public class GameService {
 
 			Game game = new Game();
 			game.setHost(user);
+			game.setStatus(GameStatus.CREATED.name().toLowerCase());
 			gameRepository.save(game);
 
 			return gameRepository.findAll();
@@ -45,6 +46,7 @@ public class GameService {
 			Game currentGame = gameRepository.findById(joinGameInputMessage.getGameId()).orElse(null);
 			if(currentGame!=null) {
 				currentGame.setGuest(user);
+				currentGame.setStatus(GameStatus.STARTED.name().toLowerCase());
 				gameRepository.save(currentGame);
 			}
 			return currentGame;

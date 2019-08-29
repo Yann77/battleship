@@ -11,12 +11,16 @@ import javax.persistence.*;
 @Entity
 public class Board {
 
+    private static final int WIDTH = 10;
+    private static final int HEIGHT = 10;
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "board")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id", referencedColumnName = "id", nullable = false)
     private List<Cell> cellList;
 
     @OneToOne

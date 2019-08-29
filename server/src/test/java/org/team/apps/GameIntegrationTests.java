@@ -86,7 +86,7 @@ public class GameIntegrationTests {
 							joinGame.setGameId(gameOutputMessage.getGames().get(1).getGameId());
 							joinGame.setUsername("SuperUser");
 							session.send("/app/game/join", joinGame);
-							//session.send("/app/board/get/" + gameOutputMessage.getGames().get(1).getHost().getUserId(), null);
+
 						}
 						catch (Throwable t) {
 							failure.set(t);
@@ -171,6 +171,7 @@ public class GameIntegrationTests {
 					joinGame.setGameId(1);
 					joinGame.setUsername("SuperUser");
 					session.send("/app/game/join", joinGame);
+					session.send("/app/board/get/1", null);
 				}
 				catch (Throwable t) {
 					failure.set(t);
