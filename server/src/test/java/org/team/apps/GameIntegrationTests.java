@@ -165,17 +165,17 @@ public class GameIntegrationTests {
 					}
 				});
 
-				session.subscribe("/topic/board/get/1", new StompFrameHandler() {
+				session.subscribe("/topic/game/get/0", new StompFrameHandler() {
 					@Override
 					public Type getPayloadType(StompHeaders headers) {
-						return Board.class;
+						return Game.class;
 					}
 
 					@Override
 					public void handleFrame(StompHeaders headers, Object payload) {
-						Board board = (Board) payload;
+						Game game = (Game) payload;
 						try {
-							System.out.println(board);
+							System.out.println(game);
 						}
 						catch (Throwable t) {
 							failure.set(t);
@@ -193,7 +193,7 @@ public class GameIntegrationTests {
 					joinGame.setGameId(1);
 					joinGame.setUsername("SuperUser");
 					session.send("/app/game/join", joinGame);
-					session.send("/app/board/get/1", null);
+					session.send("/app/game/get/0", null);
 				}
 				catch (Throwable t) {
 					failure.set(t);

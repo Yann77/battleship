@@ -19,8 +19,8 @@ public class User {
     @Column(name = "id")
     private Integer userId;
 
-    @OneToOne
-    private Board board;
+//    @OneToOne
+//    private Board board;
 
     public String getUsername() {
         return username;
@@ -38,11 +38,11 @@ public class User {
         this.userId = userId;
     }
 
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
+//    public Board getBoard() {
+//        return board;
+//    }
+//
+//    public void setBoard(Board board) {
+//        this.board = board;
+//    }
 }
