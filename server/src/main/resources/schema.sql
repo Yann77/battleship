@@ -27,7 +27,7 @@ create table cell (
                        id    integer identity primary key,
                        board_id     integer,
                        status      varchar(64),
-                       type        varchar(1),
+                       type        varchar(64),
                        cord_x      integer,
                        cord_y      integer);
 
