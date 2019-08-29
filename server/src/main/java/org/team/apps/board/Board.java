@@ -11,6 +11,9 @@ import javax.persistence.*;
 @Entity
 public class Board {
 
+    private static final int WIDTH = 10;
+    private static final int HEIGHT = 10;
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
