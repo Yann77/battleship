@@ -25,7 +25,8 @@ public class BoardService {
            if(board.isPresent()) {
                return board.get();
            } else {
-               Board board1 = createBoard(user.get());
+               Board board1 = RandomShipGenerator.generate();
+               board1.setUser(user.get());
                return this.boardRepository.save(board1);
            }
 

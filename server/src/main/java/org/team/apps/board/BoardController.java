@@ -14,14 +14,8 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-//    @MessageMapping("/board/create")
-//    @SendTo("/topic/board/created")
-//    public GameOutputMessage create(e) {
-//        return new GameOutputMessage(games);
-//    }
-
     @MessageMapping("/board/get/{userId}")
-    @SendTo("/topic/board/get")
+    @SendTo("/topic/board/get/{userId}")
     public Board getByUserId(@DestinationVariable("userId") Integer userId) {
         System.out.println(String.format("userId:%s", userId));
         Board board = boardService.findByUserId(userId);

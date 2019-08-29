@@ -23,6 +23,7 @@ public class RandomShipGenerator {
 
 			for (int i = 0; i < shipType.size; i++) {
 				Cell cell = setCell(isHorizontal, i, startCoordLimit, startCoordOther, shipType.name());
+				cell.setTouched(false); //Mmm..
 				shipCells.add(cell);
 			}
 
