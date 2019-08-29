@@ -19,6 +19,7 @@ public class Cell {
     @Column(name = "id")
     private Integer id;
 
+    @Column(insertable = false)
     private Boolean touched;
 
     private String type;

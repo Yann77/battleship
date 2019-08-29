@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import org.team.apps.user.User;
+import org.team.apps.board.Board;
 
 @Entity
 public class Game {
@@ -19,11 +19,11 @@ public class Game {
 
     @JoinColumn(name = "host", referencedColumnName="id")
     @OneToOne
-    private User host;
+    private Board host;
 
     @JoinColumn(name = "guest", referencedColumnName="id")
     @OneToOne
-    private User guest;
+    private Board guest;
 
     private String status;
 
@@ -35,19 +35,19 @@ public class Game {
         this.gameId = gameId;
     }
 
-    public User getHost() {
+    public Board getHost() {
         return host;
     }
 
-    public void setHost(User host) {
+    public void setHost(Board host) {
         this.host = host;
     }
 
-    public User getGuest() {
+    public Board getGuest() {
         return guest;
     }
 
-    public void setGuest(User guest) {
+    public void setGuest(Board guest) {
         this.guest = guest;
     }
 

@@ -1,11 +1,14 @@
 package org.team.apps.board;
 
 import java.util.List;
-
-
-import org.team.apps.user.User;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -16,20 +19,11 @@ public class Board {
     @Column(name = "id")
     private Integer id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "board_id", referencedColumnName = "id", nullable = false)
     private List<Cell> cellList;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    private String username;
 
     public Integer getId() {
         return id;
@@ -47,5 +41,11 @@ public class Board {
         this.cellList = cellList;
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

@@ -131,7 +131,7 @@ public class GameIntegrationTests {
 						Board currentBoard = (Board) payload;
 						try {
 							Gson gson = new GsonBuilder().create();
-							System.out.println(String.format("board user %s : %s", currentBoard.getUser().getUsername(), currentBoard));
+							System.out.println(String.format("board %s", currentBoard));
 						}
 						catch (Throwable t) {
 							failure.set(t);

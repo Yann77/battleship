@@ -7,11 +7,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.team.apps.board.BoardRepository;
-import org.team.apps.board.BoardService;
 import org.team.apps.game.GameRepository;
 import org.team.apps.game.GameService;
-import org.team.apps.user.UserRepository;
-
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
@@ -32,13 +29,10 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
 
     @Bean
-    GameService gameService(GameRepository gameRepository, UserRepository userRepository, BoardRepository boardRepository) {
-        return new GameService(gameRepository, userRepository, boardRepository);
+    GameService gameService(GameRepository gameRepository,  BoardRepository boardRepository) {
+        return new GameService(gameRepository, boardRepository);
     }
 
-    @Bean
-    BoardService boardService(BoardRepository boardRepository, UserRepository userRepository) {
-        return new BoardService(boardRepository, userRepository);
-    }
+
 
 }
