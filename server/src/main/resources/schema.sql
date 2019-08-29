@@ -33,8 +33,8 @@ create table cell (
 
 alter table game add foreign key (host) references user(id);
 alter table game add foreign key (guest) references user(id);
-alter table view add foreign key (board_id) references board(id);
-alter table cell add foreign key (board_id) references board(id);
+-- alter table view add foreign key (board_id) references board(id);
+-- alter table cell add foreign key (board_id) references board(id);
 
 
 

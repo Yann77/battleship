@@ -47,7 +47,7 @@ public class BoardService {
         return IntStream.range(1, 10)
                 .mapToObj( i -> {
                     Cell cell = new Cell();
-                    cell.setBoard(board);
+//                    cell.setBoard(board);
                     if (i % 2 == 0) {
                         cell.setCoordinateX(i);
                         cell.setCoordinateY(1);
