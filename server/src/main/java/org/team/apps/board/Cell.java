@@ -38,7 +38,6 @@ public class Cell {
     }
 
 
-
     public Boolean getTouched() {
         return touched;
     }

@@ -18,46 +18,44 @@ public class BoardService {
         this.userRepository = userRepository;
     }
 
-    public Board findByUserId(Integer id) {
-        Optional<User> user = this.userRepository.findById(id);
-        if(user.isPresent()) {
-           Optional<Board> board =  this.boardRepository.findByUser(user.get());
-           if(board.isPresent()) {
-               return board.get();
-           } else {
-               Board board1 = RandomShipGenerator.generate();
-               board1.setUser(user.get());
-               return this.boardRepository.save(board1);
-           }
-
-        }
-        return null;
-    }
-
-    private Board createBoard(User user) {
-        Board board = new Board();
-        List<Cell> cells = createCells(board);
-
-        board.setCellList(cells);
-        board.setUser(user);
-        return board;
-    }
-
-
-    private List<Cell> createCells(Board board) {
-        return IntStream.range(1, 10)
-                .mapToObj( i -> {
-                    Cell cell = new Cell();
-//                    cell.setBoard(board);
-                    if (i % 2 == 0) {
-                        cell.setCoordinateX(i);
-                        cell.setCoordinateY(1);
-                    } else {
-                        cell.setCoordinateY(i);
-                        cell.setCoordinateX(1);
-                    }
-                    return cell;
-                }).collect(Collectors.toList());
-    }
+//    public Board findByUserId(Integer id) {
+//        Optional<User> user = this.userRepository.findById(id);
+//        if(user.isPresent()) {
+//           Optional<Board> board =  this.boardRepository.findByUser(user.get());
+//           if(board.isPresent()) {
+//               return board.get();
+//           } else {
+//
+//           }
+//
+//        }
+//        return null;
+//    }
+//
+//    private Board createBoard(User user) {
+//        Board board = new Board();
+//        List<Cell> cells = createCells(board);
+//
+//        board.setCellList(cells);
+//        board.setUser(user);
+//        return board;
+//    }
+//
+//
+//    private List<Cell> createCells(Board board) {
+//        return IntStream.range(1, 10)
+//                .mapToObj( i -> {
+//                    Cell cell = new Cell();
+////                    cell.setBoard(board);
+//                    if (i % 2 == 0) {
+//                        cell.setCoordinateX(i);
+//                        cell.setCoordinateY(1);
+//                    } else {
+//                        cell.setCoordinateY(i);
+//                        cell.setCoordinateX(1);
+//                    }
+//                    return cell;
+//                }).collect(Collectors.toList());
+//    }
 
 }

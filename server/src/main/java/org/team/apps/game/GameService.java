@@ -2,6 +2,10 @@ package org.team.apps.game;
 
 import java.util.List;
 
+import org.team.apps.board.Board;
+import org.team.apps.board.BoardRepository;
+import org.team.apps.board.BoardService;
+import org.team.apps.board.RandomShipGenerator;
 import org.team.apps.user.User;
 import org.team.apps.user.UserRepository;
 
@@ -12,10 +16,12 @@ public class GameService {
 
 	private GameRepository gameRepository;
 	private UserRepository userRepository;
+	private BoardRepository boardRepository;
 
-	public GameService(GameRepository gameRepository, UserRepository userRepository) {
+	public GameService(GameRepository gameRepository, UserRepository userRepository, BoardRepository boardRepository) {
 		this.gameRepository = gameRepository;
 		this.userRepository = userRepository;
+		this.boardRepository =  boardRepository;
 	}
 
 	public List<Game> create(String username) {
@@ -29,6 +35,8 @@ public class GameService {
 			game.setStatus(GameStatus.CREATED.name());
 			gameRepository.save(game);
 
+			createBoard(user);
+
 			return gameRepository.findAll();
 		}
 		catch (Exception e) {
@@ -37,11 +45,19 @@ public class GameService {
 		}
 	}
 
+	public void createBoard(User user) {
+		Board board1 = RandomShipGenerator.generate();
+		board1.setUser(user);
+		boardRepository.save(board1);
+	}
+
 	public Game joinGame(JoinGameInputMessage joinGameInputMessage) {
 		try {
 			User user = new User();
 			user.setUsername(joinGameInputMessage.getUsername());
 			userRepository.save(user);
+
+			createBoard(user);
 
 			Game currentGame = gameRepository.findById(joinGameInputMessage.getGameId()).orElse(null);
 			if(currentGame!=null) {
@@ -59,5 +75,14 @@ public class GameService {
 
 	public List<Game> findAll() {
 		return gameRepository.findAll();
+	}
+
+	public Game update(Integer gameId) {
+		//To change
+		return gameRepository.findById(gameId).get();
+	}
+
+	public Game find(Integer gameId) {
+		return gameRepository.findById(gameId).get();
 	}
 }

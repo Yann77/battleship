@@ -32,8 +32,8 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
 
     @Bean
-    GameService gameService(GameRepository gameRepository, UserRepository userRepository) {
-        return new GameService(gameRepository, userRepository);
+    GameService gameService(GameRepository gameRepository, UserRepository userRepository, BoardRepository boardRepository) {
+        return new GameService(gameRepository, userRepository, boardRepository);
     }
 
     @Bean

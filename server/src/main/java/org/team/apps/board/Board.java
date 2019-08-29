@@ -11,9 +11,6 @@ import javax.persistence.*;
 @Entity
 public class Board {
 
-    private static final int WIDTH = 10;
-    private static final int HEIGHT = 10;
-
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,11 +20,8 @@ public class Board {
     @JoinColumn(name = "board_id", referencedColumnName = "id", nullable = false)
     private List<Cell> cellList;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private User user;
-
-//    @OneToMany
-//    private List<View> viewList;
 
     public User getUser() {
         return user;
@@ -53,11 +47,5 @@ public class Board {
         this.cellList = cellList;
     }
 
-//    public List<View> getViewList() {
-//        return viewList;
-//    }
-//
-//    public void setViewList(List<View> viewList) {
-//        this.viewList = viewList;
-//    }
+
 }
