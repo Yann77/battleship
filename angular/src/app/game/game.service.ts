@@ -11,13 +11,17 @@ export class GameService {
   constructor(private socketClient: SocketClientService) {
   }
 
+  init(): void {
+    this.socketClient.send(`/app/game/get`, {});
+  }
+
   save(game: GameInputMessage): void {
     this.socketClient.send(`/app/game/create`, game);
   }
 
   findAll(): Observable<Array<Game>> {
     return this.socketClient
-      .onMessage(`/app/game/get`)
+      .onMessage(`/topic/game/get`)
       .pipe(map((games: GameOutputMessage) => games.games));
   }
 

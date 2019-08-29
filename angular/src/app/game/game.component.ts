@@ -26,6 +26,8 @@ export class GameComponent implements OnInit {
       username: ['', Validators.required]
     });
 
+    this.gameService.init();
+
     this.gameList$ = this.gameService.findAll().pipe(
       map((games) => {
         return games.map((game) => {
