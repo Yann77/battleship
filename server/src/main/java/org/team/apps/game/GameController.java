@@ -17,7 +17,7 @@ public class GameController {
 	private GameService gameService;
 
 	@MessageMapping("/game/create")
-	@SendTo("/topic/game/created")
+	@SendTo("/topic/game/get")
 	public GameOutputMessage create(GameInputMessage gameInputMessage) {
 		System.out.println(gameInputMessage.getUsername());
 		List<Game> games = gameService.create(gameInputMessage.getUsername());
@@ -25,14 +25,15 @@ public class GameController {
 	}
 
 	@MessageMapping("/game/join")
-	@SendTo("/topic/game/join")
-	public Game join(JoinGameInputMessage joinGameInputMessage) {
-		System.out.println("Game to join : "+joinGameInputMessage.getGameId());
-
-		return gameService.joinGame(joinGameInputMessage);
+	@SendTo("/topic/game/get")
+	public GameOutputMessage join(JoinGameInputMessage joinGameInputMessage) {
+		System.out.println("Game to join : "+ joinGameInputMessage.getGameId());
+		gameService.joinGame(joinGameInputMessage);
+		return new GameOutputMessage(gameService.findAll());
 	}
 
-	@SubscribeMapping("/game/get")
+	@MessageMapping("/game/get")
+	@SendTo("/topic/game/get")
 	public GameOutputMessage findAll() {
 		List<Game> games = gameService.findAll();
 		return new GameOutputMessage(games);
