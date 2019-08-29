@@ -5,13 +5,21 @@ import javax.persistence.*;
 @Entity
 public class Cell {
 
-    @Id
+	public Cell() {
+	}
+
+	public Cell(final String type, final Integer coordinateX, final Integer coordinateY) {
+		this.type = type;
+		this.coordinateX = coordinateX;
+		this.coordinateY = coordinateY;
+	}
+
+	@Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-
-    private String status;
+    private Boolean touched;
 
     private String type;
 
@@ -31,12 +39,12 @@ public class Cell {
 
 
 
-    public String getStatus() {
-        return status;
+    public Boolean getTouched() {
+        return touched;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setTouched(Boolean touched) {
+        this.touched = touched;
     }
 
     public String getType() {
