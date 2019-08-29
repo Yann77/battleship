@@ -165,6 +165,28 @@ public class GameIntegrationTests {
 					}
 				});
 
+				session.subscribe("/topic/board/get/1", new StompFrameHandler() {
+					@Override
+					public Type getPayloadType(StompHeaders headers) {
+						return Board.class;
+					}
+
+					@Override
+					public void handleFrame(StompHeaders headers, Object payload) {
+						Board board = (Board) payload;
+						try {
+							System.out.println(board);
+						}
+						catch (Throwable t) {
+							failure.set(t);
+						}
+//						finally {
+//							session.disconnect();
+//							latch.countDown();
+//						}
+					}
+				});
+
 				try {
 					session.send("/app/game/create", new GameInputMessage("Spring"));
 					JoinGameInputMessage joinGame = new JoinGameInputMessage();

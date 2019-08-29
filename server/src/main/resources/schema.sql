@@ -26,7 +26,7 @@ create table view (
 create table cell (
                        id    integer identity primary key,
                        board_id     integer,
-                       touched      boolean NOT NULL DEFAULT FALSE,
+                       touched      boolean DEFAULT FALSE NOT NULL,
                        type        varchar(64),
                        cord_x      integer,
                        cord_y      integer);

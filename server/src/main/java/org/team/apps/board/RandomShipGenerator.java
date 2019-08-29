@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.sun.prism.image.Coords;
-
 public class RandomShipGenerator {
 
 	private static final Random generator = new SecureRandom();
