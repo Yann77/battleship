@@ -42,7 +42,8 @@ public class GameController {
 	@MessageMapping("/game/get/{gameId}")
 	@SendTo("/topic/game/get/{gameId}")
 	public Game init(@DestinationVariable("gameId") Integer gameId) {
-		return gameService.find(gameId);
+		Game game =  gameService.find(gameId);
+		return game;
 	}
 
 	@MessageMapping("/game/fire/{gameId}")

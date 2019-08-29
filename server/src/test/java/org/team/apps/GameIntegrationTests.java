@@ -189,11 +189,11 @@ public class GameIntegrationTests {
 
 				try {
 					session.send("/app/game/create", new GameInputMessage("Spring"));
-					JoinGameInputMessage joinGame = new JoinGameInputMessage();
-					joinGame.setGameId(1);
-					joinGame.setUsername("SuperUser");
-					session.send("/app/game/join", joinGame);
-					session.send("/app/game/get/0", null);
+//					JoinGameInputMessage joinGame = new JoinGameInputMessage();
+//					joinGame.setGameId(1);
+//					joinGame.setUsername("SuperUser");
+//					session.send("/app/game/join", joinGame);
+//					session.send("/app/game/get/0", null);
 				}
 				catch (Throwable t) {
 					failure.set(t);
