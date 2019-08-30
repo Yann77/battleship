@@ -2,6 +2,7 @@ package org.team.apps.game;
 
 public enum GameStatus {
     CREATED,
-    STARTED,
+	GUEST,
+	HOST,
     ENDED
 }

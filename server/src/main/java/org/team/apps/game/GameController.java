@@ -1,11 +1,13 @@
 package org.team.apps.game;
 
 import java.util.List;
+
+import org.team.apps.board.Cell;
+
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.team.apps.board.Cell;
 
 @Controller
 public class GameController {
@@ -27,7 +29,7 @@ public class GameController {
 	@MessageMapping("/game/join")
 	@SendTo("/topic/game/get")
 	public GameOutputMessage join(JoinGameInputMessage joinGameInputMessage) {
-		System.out.println("Game to join : "+ joinGameInputMessage.getGameId());
+		System.out.println("Game to join : " + joinGameInputMessage.getGameId());
 		gameService.joinGame(joinGameInputMessage);
 		return new GameOutputMessage(gameService.findAll());
 	}
@@ -42,14 +44,14 @@ public class GameController {
 	@MessageMapping("/game/get/{gameId}")
 	@SendTo("/topic/game/get/{gameId}")
 	public Game init(@DestinationVariable("gameId") Integer gameId) {
-		Game game =  gameService.find(gameId);
+		Game game = gameService.find(gameId);
 		return game;
 	}
 
 	@MessageMapping("/game/fire/{gameId}")
 	@SendTo("/topic/game/get/{gameId}")
 	public Game fire(@DestinationVariable("gameId") Integer gameId, Cell cell) {
-		return gameService.update(gameId);
+		return gameService.update(gameId, cell);
 	}
 }
 
