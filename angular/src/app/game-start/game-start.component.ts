@@ -1,8 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
 import {Location} from '@angular/common';
 import {GameStartService} from './game-start.service';
-import {EMPTY, Observable, of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {StartedGame} from '../app.model';
 
 @Component({
@@ -11,13 +10,11 @@ import {StartedGame} from '../app.model';
   styleUrls: ['./game-start.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
+export class GameStartComponent implements OnInit {
   startedGame$: Observable<StartedGame> = of();
 
   constructor(private location: Location,
-              private gameStartService: GameStartService) {
-    super();
-  }
+              private gameStartService: GameStartService) {}
 
   ngOnInit() {
     const state = this.location.getState() as any;

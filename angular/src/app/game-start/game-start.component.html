@@ -1,2 +1,3 @@
-{{startedGame$ | async | json}}
-<app-board></app-board>
+<div *ngIf="(startedGame$ | async) as startedGame">
+  <app-board [boardData]="startedGame.guest"></app-board>
+</div>

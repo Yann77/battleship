@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {TakeUntilDestroyed} from './core/take-until-destroyed/take-until-destroyed';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,12 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  title = 'angular';
+export class AppComponent  extends TakeUntilDestroyed implements OnInit {
+
+  constructor() {
+    super();
+  }
+
+  ngOnInit(): void {
+  }
 }
