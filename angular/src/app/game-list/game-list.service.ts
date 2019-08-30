@@ -28,6 +28,12 @@ export class GameListService extends TakeUntilDestroyed {
       .pipe(map((games: GameOutputMessage) => games.games));
   }
 
+  create(): Observable<Game> {
+    return this.socketClient
+    .onMessage(`/topic/game/created`)
+    .pipe(map((game) => game));
+  }
+
   join(gameId: number, username: string): void {
     this.socketClient.send(`/app/game/join/${gameId}`, username).subscribe();
   }
