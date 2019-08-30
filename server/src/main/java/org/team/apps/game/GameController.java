@@ -1,14 +1,20 @@
 package org.team.apps.game;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.team.apps.board.Cell;
 
 @Controller
 public class GameController {
+
+	private final Logger logger = LoggerFactory.getLogger(GameController.class);
 
 	public GameController(GameService gameService) {
 		this.gameService = gameService;
@@ -50,6 +56,14 @@ public class GameController {
 	@SendTo("/topic/game/get/{gameId}")
 	public Game fire(@DestinationVariable("gameId") Integer gameId, Cell cell) {
 		return gameService.update(gameId);
+	}
+
+	@MessageExceptionHandler
+	@SendToUser("/topic/error")
+	public String handleException(RuntimeException ex) {
+		String msg = String.format("Oh no, there is an error %[s]", ex.getMessage());
+		logger.error(msg, ex);
+		return msg;
 	}
 }
 
