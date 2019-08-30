@@ -1,8 +1,8 @@
 import {SocketClientService} from '../core/socket-client.service';
 import {Injectable} from '@angular/core';
-import {GameInputMessage, GameOutputMessage, JoinGameInputMessage} from './game-list.model';
+import {GameOutputMessage} from './game-list.model';
 import {Observable} from 'rxjs';
-import {map, takeUntil} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Game, StartedGame} from '../app.model';
 import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
 
@@ -47,16 +47,4 @@ export class GameListService extends TakeUntilDestroyed {
         })
       );
   }
-
-  // gameCreated(): Observable<any> {
-  //   return this.socketClient
-  //     .onMessage(`/topic/game/created`)
-  //     .pipe(
-  //       map((game: Game) => {
-  //         return this.socketClient.send(`/app/game/get/${game.gameId}`,{}).subscribe();
-  //       })
-  //     );
-  // }
-
-
 }

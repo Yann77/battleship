@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SocketClientService} from '../core/socket-client.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {CellCoord, StartedGame} from '../app.model';
+import {CellCoord} from '../app.model';
 import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
 
 @Injectable({

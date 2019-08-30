@@ -18,7 +18,6 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   gameList$: Observable<Array<Game>>;
   registerForm: FormGroup;
   submitted = false;
-  game: Game;
 
   constructor(private formBuilder: FormBuilder,
               private gameService: GameListService,
@@ -33,8 +32,6 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
     });
 
     this.gameService.init();
-
-
 
     this.gameList$ = this.gameService.findAll().pipe(
       map((games) => {
@@ -64,20 +61,14 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
     if (this.registerForm.invalid) {
       return;
     }
 
-    // this.gameService.gameCreated().pipe(
-    //   takeUntil(this.destroyed$)
-    // ).subscribe((game) => {
-    //   console.log(game);
-    // });
-
     this.gameService.create().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
-      this.game = game;
       this.gameService.init();
-      this.router.navigateByUrl('/game-start', { state: game }).then(() => {
+      this.router.navigateByUrl('/game-start', { state: {startedGame: game, asHost: true}}).then(() => {
         this.onReset();
       });
     });
@@ -96,7 +87,7 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       takeUntil(this.destroyed$)
     ).subscribe((startedGame) => {
       this.gameService.init();
-      this.router.navigateByUrl('/game-start', { state: startedGame }).then(() => {
+      this.router.navigateByUrl('/game-start', { state: {startedGame, asHost: false }}).then(() => {
         this.onReset();
       });
     });

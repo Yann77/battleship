@@ -22,7 +22,6 @@ public class GameController {
 
 	private GameService gameService;
 
-
 	@MessageMapping("/game/create")
 	@SendTo("/topic/game/created")
 	public Game create(String username) {

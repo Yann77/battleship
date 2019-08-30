@@ -1,3 +1,10 @@
-<div *ngIf="(startedGame$ | async) as startedGame">
-  <app-board [boardData]="startedGame.guest"></app-board>
+<div class="container" *ngIf="(startedGame$ | async) as startedGame">
+  <div class="row">
+    <div class="col p-2"><h1>Your Game</h1></div>
+    <div class="col p-2"><h1>Buddy Game</h1></div>
+  </div>
+  <div class="row align-content-between">
+    <app-board class="col" [boardData]="asHost ? startedGame.host : startedGame.guest"></app-board>
+    <app-board class="col" [boardData]="asHost ? startedGame.guest : startedGame.host"></app-board>
+  </div>
 </div>

@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {GameStartService} from './game-start.service';
 import {Observable, of} from 'rxjs';
 import {StartedGame} from '../app.model';
 
@@ -12,13 +11,15 @@ import {StartedGame} from '../app.model';
 })
 export class GameStartComponent implements OnInit {
   startedGame$: Observable<StartedGame> = of();
+  asHost: boolean;
 
   constructor(private location: Location) {}
 
   ngOnInit() {
     const state = this.location.getState() as any;
-    if (state && ('gameId' in state)) {
-      this.startedGame$ = of(state as StartedGame);
+    if (state && state.startedGame && ('gameId' in state.startedGame)) {
+      this.asHost = state.asHost;
+      this.startedGame$ = of(state.startedGame as StartedGame);
     }
   }
 }
