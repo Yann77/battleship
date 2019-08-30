@@ -1,6 +1,7 @@
 package org.team.apps.game;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.team.apps.board.Board;
 import org.team.apps.board.BoardRepository;
@@ -110,13 +111,21 @@ public class GameService {
 	}
 
 	private void updateBoard(Board board, Cell cell) {
-		board.getCellList().stream().filter(boardCell -> !StringUtils.isEmpty(boardCell.getType())).forEach(boardCell -> {
+		final AtomicBoolean miss = new AtomicBoolean(true);
+		List<Cell> currentCells = board.getCellList();
+
+		currentCells.stream().filter(boardCell -> !StringUtils.isEmpty(boardCell.getType())).forEach(boardCell -> {
 			if (boardCell.compareCoordinate(cell.getCoordinateX(), cell.getCoordinateY())) {
 				boardCell.setTouched(true);
+				miss.set(false);
 			}
 		});
 
-
-
+		//add missed hit if no boat touched
+		if(miss.get()){
+			currentCells.add(cell);
+			board.setCellList(currentCells);
+		}
 	}
+
 }
