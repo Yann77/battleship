@@ -20,15 +20,4 @@ export class GameStartService extends TakeUntilDestroyed {
   fire(gameId, x, y): void {
     this.socketClient.send(`/app/game/get/${gameId}`, { coordinateX: x, coordinateY: y } as CellCoord).subscribe();
   }
-
-  find(gameId): Observable<StartedGame> {
-    return this.socketClient
-      .onMessage(`/topic/game/get/${gameId}`)
-      .pipe(
-        map((game: StartedGame) => {
-          console.log(game);
-          return game;
-        })
-      );
-  }
 }

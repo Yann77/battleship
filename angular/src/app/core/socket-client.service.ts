@@ -61,7 +61,7 @@ export class SocketClientService implements OnDestroy {
       .pipe(
         first(),
         map((inst) => {
-          return inst.send(topic, {}, JSON.stringify(payload));
+          return inst.send(topic, {}, payload);
         })
       );
   }

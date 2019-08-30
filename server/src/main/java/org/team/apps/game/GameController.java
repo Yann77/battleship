@@ -1,14 +1,20 @@
 package org.team.apps.game;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.team.apps.board.Cell;
 
 @Controller
 public class GameController {
+
+	@Autowired
+	private SimpMessagingTemplate template;
 
 	public GameController(GameService gameService) {
 		this.gameService = gameService;
@@ -16,20 +22,28 @@ public class GameController {
 
 	private GameService gameService;
 
+//	@MessageMapping("/game/create")
+//	@SendTo("/topic/game/get")
+//	public GameOutputMessage create(String username) {
+//		System.out.println(username);
+//		List<Game> games = gameService.create(username);
+//		return new GameOutputMessage(games);
+//	}
+
 	@MessageMapping("/game/create")
 	@SendTo("/topic/game/get")
-	public GameOutputMessage create(GameInputMessage gameInputMessage) {
-		System.out.println(gameInputMessage.getUsername());
-		List<Game> games = gameService.create(gameInputMessage.getUsername());
-		return new GameOutputMessage(games);
+	public Game create(String username) {
+		System.out.println("Creating a game for " + username);
+		Game game = gameService.create(username);
+		this.template.convertAndSend("/topic/game/get/" + game.getGameId(), game);
+		return game;
 	}
 
-	@MessageMapping("/game/join")
-	@SendTo("/topic/game/get")
-	public GameOutputMessage join(JoinGameInputMessage joinGameInputMessage) {
-		System.out.println("Game to join : "+ joinGameInputMessage.getGameId());
-		gameService.joinGame(joinGameInputMessage);
-		return new GameOutputMessage(gameService.findAll());
+	@MessageMapping("/game/join/{gameId}")
+	@SendTo("/topic/game/get/{gameId}")
+	public Game join(@DestinationVariable("gameId") Integer gameId, String username) {
+		System.out.println("Joining game : "+ gameId);
+		return gameService.joinGame(gameId, username);
 	}
 
 	@MessageMapping("/game/get")

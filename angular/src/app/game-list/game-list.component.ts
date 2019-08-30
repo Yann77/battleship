@@ -34,7 +34,6 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
     this.gameService.init();
 
     this.gameList$ = this.gameService.findAll().pipe(
-      takeUntil(this.destroyed$),
       map((games) => {
         return games.map((game) => {
           let desc = '';
@@ -66,7 +65,13 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       return;
     }
 
-    this.gameService.save(this.registerForm.value);
+    // this.gameService.gameCreated().pipe(
+    //   takeUntil(this.destroyed$)
+    // ).subscribe((game) => {
+    //   console.log(game);
+    // });
+
+    this.gameService.save(this.registerForm.value.username);
     this.onReset();
   }
 
@@ -76,10 +81,14 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   }
 
   onJoining(game: Game) {
-    this.gameService.join(game.gameId, this.registerForm.value.username).subscribe(() => {
-      this.router.navigateByUrl('/game-start', { state: { gameId: game.gameId } }).then(() => {
+    this.gameService.getGame(game.gameId).pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe((startedGame) => {
+      this.router.navigateByUrl('/game-start', { state: startedGame }).then(() => {
         this.onReset();
       });
     });
+
+    this.gameService.join(game.gameId, this.registerForm.value.username);
   }
 }

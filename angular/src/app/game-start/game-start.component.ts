@@ -13,14 +13,12 @@ import {StartedGame} from '../app.model';
 export class GameStartComponent implements OnInit {
   startedGame$: Observable<StartedGame> = of();
 
-  constructor(private location: Location,
-              private gameStartService: GameStartService) {}
+  constructor(private location: Location) {}
 
   ngOnInit() {
     const state = this.location.getState() as any;
     if (state && ('gameId' in state)) {
-      this.startedGame$ = this.gameStartService.find(state.gameId);
-      this.gameStartService.init(state.gameId);
+      this.startedGame$ = of(state as StartedGame);
     }
   }
 }

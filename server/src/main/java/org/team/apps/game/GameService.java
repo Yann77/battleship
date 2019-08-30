@@ -16,7 +16,7 @@ public class GameService {
 		this.boardRepository =  boardRepository;
 	}
 
-	public List<Game> create(String username) {
+	public Game create(String username) {
 		try {
 			Board board = RandomShipGenerator.generate();
 			board.setUsername(username);
@@ -27,7 +27,8 @@ public class GameService {
 			game.setStatus(GameStatus.CREATED.name());
 			gameRepository.save(game);
 
-			return gameRepository.findAll();
+			return game;
+//			return gameRepository.findAll();
 		}
 		catch (Exception e) {
 			System.out.println(e);
@@ -35,13 +36,13 @@ public class GameService {
 		}
 	}
 
-	public Game joinGame(JoinGameInputMessage joinGameInputMessage) {
+	public Game joinGame(Integer gameId, String username) {
 		try {
 			Board board = RandomShipGenerator.generate();
-			board.setUsername(joinGameInputMessage.getUsername());
+			board.setUsername(username);
 			boardRepository.save(board);
 
-			Game currentGame = gameRepository.findById(joinGameInputMessage.getGameId()).orElse(null);
+			Game currentGame = gameRepository.findById(gameId).orElse(null);
 			if(currentGame!=null) {
 				currentGame.setGuest(board);
 				currentGame.setStatus(GameStatus.STARTED.name());
