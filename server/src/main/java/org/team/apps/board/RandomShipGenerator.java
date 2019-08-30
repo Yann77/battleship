@@ -10,6 +10,7 @@ public class RandomShipGenerator {
 	private static final Random generator = new SecureRandom();
 
 	public static Board generate() {
+		long startTime = System.currentTimeMillis();
 
 		Board board = new Board();
 		List<Cell> allBoatsCells = new ArrayList<>();
@@ -19,6 +20,8 @@ public class RandomShipGenerator {
 		}
 		board.setCellList(allBoatsCells);
 
+		long endTime = System.currentTimeMillis();
+		System.out.println("Board generation : "+ (endTime - startTime));
 		return board;
 	}
 
