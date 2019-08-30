@@ -1,24 +1,29 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Game, GameStatus} from './game.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {GameService} from './game.service';
+import {GameListService} from './game-list.service';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {Game, GameStatus} from '../app.model';
+import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss'],
+  selector: 'app-game-list',
+  templateUrl: './game-list.component.html',
+  styleUrls: ['./game-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GameComponent implements OnInit {
+export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   displayedColumns: string[] = ['status', 'name', 'players', 'description', 'gameDt', 'star'];
   gameList$: Observable<Array<Game>>;
   registerForm: FormGroup;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private gameService: GameService) { }
+              private gameService: GameListService,
+              private router: Router) {
+    super();
+  }
 
   ngOnInit() {
 
@@ -31,24 +36,24 @@ export class GameComponent implements OnInit {
     this.gameList$ = this.gameService.findAll().pipe(
       map((games) => {
         return games.map((game) => {
-          if (!game.status) {
-            game.status = GameStatus.CREATED;
-          }
           let desc = '';
+          let gameDt = '';
           switch (game.status) {
             case GameStatus.CREATED:
               desc = !game.guest ? '1 missing player to start...' : 'Should start soon...';
               break;
             case GameStatus.STARTED:
-              desc = 'started at ' + new Date();
+              desc = 'started at ';
+              gameDt = new Date().toISOString();
               break;
             case GameStatus.ENDED:
               desc = 'ended at ' + new Date();
+              gameDt = new Date().toISOString();
               break;
             default:
               break;
           }
-          return Object.assign(game, {name: `Game #${game.gameId}`, description: desc});
+          return Object.assign(game, {name: `Game #${game.gameId}`, description: desc, gameDt});
         });
       })
     );
@@ -68,8 +73,10 @@ export class GameComponent implements OnInit {
     this.registerForm.reset();
   }
 
-  onJoining(gameId) {
-    this.gameService.join(gameId, this.registerForm.value.username);
+  onJoining(game: Game) {
+    this.gameService.join(game.gameId, this.registerForm.value.username);
+    this.router.navigateByUrl('/game-start', { state: { gameId: game.gameId } }).then(() => {
+      this.onReset();
+    });
   }
-
 }

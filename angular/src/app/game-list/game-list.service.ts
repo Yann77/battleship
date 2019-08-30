@@ -1,13 +1,14 @@
 import {SocketClientService} from '../core/socket-client.service';
 import {Injectable} from '@angular/core';
-import {Game, GameInputMessage, GameOutputMessage, JoinGameInputMessage} from './game.model';
+import {GameInputMessage, GameOutputMessage, JoinGameInputMessage} from './game-list.model';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Game} from '../app.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GameService {
+export class GameListService {
   constructor(private socketClient: SocketClientService) {
   }
 

@@ -3,7 +3,7 @@
     <mat-form-field>
       <input id="username"
              type="text" matInput
-             placeholder="Player Name"
+             placeholder="Your name"
              formControlName="username"
              class="form-control"
              [ngClass]="{ 'is-invalid': submitted && registerForm.controls.username.errors }"/>
@@ -52,7 +52,7 @@
           <!-- Date Column -->
           <ng-container matColumnDef="gameDt">
             <th mat-header-cell *matHeaderCellDef> Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.gameDt}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.gameDt | date:'medium'}} </td>
           </ng-container>
 
           <!-- Star Column -->
@@ -60,7 +60,7 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <button type="button" mat-icon-button [matMenuTriggerFor]="appMenu"
-                      [matMenuTriggerData]="{gameId: element.gameId}">
+                      [matMenuTriggerData]="{game: element}">
                 <mat-icon>more_vert</mat-icon>
               </button>
             </td>
@@ -76,10 +76,10 @@
 </div>
 
 <mat-menu #appMenu="matMenu">
-  <ng-template matMenuContent let-gameId="gameId">
+  <ng-template matMenuContent let-game="game">
     <button mat-menu-item
-            (click)="onJoining(gameId)"
-            [disabled]="registerForm.controls.username.errors">
+            (click)="onJoining(game)"
+            [disabled]="registerForm.controls.username.errors || game.status !== 'CREATED'">
       Join
     </button>
     <button mat-menu-item>Cancel</button>

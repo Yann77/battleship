@@ -6,7 +6,7 @@ insert into board values (0, 'host');
 insert into board values (1, 'guest');
 
 --
-insert into game values (0,0,1,'CREATED');
+insert into game values (0,0,1,'STARTED');
 
 
 -- insert into board values ( 1, 1, 'guest_board');

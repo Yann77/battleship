@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
-import { GameComponent } from './game/game.component';
-import { InitBoardComponent } from './init-board/init-board.component';
+import { GameListComponent } from './game-list/game-list.component';
+import { GameStartComponent } from './game-start/game-start.component';
 import {
   MatButtonModule,
   MatCardModule,
@@ -21,8 +21,8 @@ import {CoreModule} from './core/core.module';
   declarations: [
     AppComponent,
     BoardComponent,
-    GameComponent,
-    InitBoardComponent
+    GameListComponent,
+    GameStartComponent
   ],
   imports: [
     AppRoutingModule,

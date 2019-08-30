@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {BoardCell} from './board.model';
-
+import {Cell} from '../app.model';
 export const DEFAULT_MATRIX_SIZE = 10;
 
 @Component({
@@ -14,7 +13,7 @@ export class BoardComponent implements OnInit {
   @Input()
   matrixSize = DEFAULT_MATRIX_SIZE;
 
-  boardCells: BoardCell[][] = [];
+  boardCells: Cell[][] = [];
 
   constructor() { }
 
@@ -22,7 +21,7 @@ export class BoardComponent implements OnInit {
     for (let i = 0; i < this.matrixSize; i++) {
       this.boardCells[i] = [];
       for (let j = 0; j < this.matrixSize; j++) {
-        this.boardCells[i][j] = new BoardCell(i, j);
+        this.boardCells[i][j] = {coordinateX: j, coordinateY: i} as Cell;
       }
     }
   }

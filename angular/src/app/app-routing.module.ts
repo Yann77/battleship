@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {GameComponent} from './game/game.component';
-import {InitBoardComponent} from './init-board/init-board.component';
+import {GameListComponent} from './game-list/game-list.component';
+import {GameStartComponent} from './game-start/game-start.component';
 
 
 const routes: Routes = [
-  { path: 'games', component: GameComponent },
-  { path: 'init-board', component: InitBoardComponent},
+  { path: 'game-list', component: GameListComponent },
+  { path: 'game-start', component: GameStartComponent},
   {
     path: '**',
-    redirectTo: 'games'
+    redirectTo: 'game-list'
   }
 ];
 
