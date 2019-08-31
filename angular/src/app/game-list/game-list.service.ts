@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {GameOutputMessage} from './game-list.model';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {Game, StartedGame} from '../app.model';
+import {Game} from '../app.model';
 import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
 
 @Injectable({
@@ -15,11 +15,11 @@ export class GameListService extends TakeUntilDestroyed {
   }
 
   init(): void {
-    this.socketClient.send(`/app/game/get`, {}).subscribe();
+    this.socketClient.send( `/app/game/get`, {});
   }
 
   save(username: string): void {
-    this.socketClient.send(`/app/game/create`, username).subscribe();
+    this.socketClient.send(`/app/game/create`, username);
   }
 
   findAll(): Observable<Array<Game>> {
@@ -35,16 +35,7 @@ export class GameListService extends TakeUntilDestroyed {
   }
 
   join(gameId: number, username: string): void {
-    this.socketClient.send(`/app/game/join/${gameId}`, username).subscribe();
-  }
-
-  getGame(gameId): Observable<StartedGame> {
-    return this.socketClient
-      .onMessage(`/topic/game/get/${gameId}`)
-      .pipe(
-        map((game: StartedGame) => {
-          return game;
-        })
-      );
+    this.socketClient.send(`/app/game/join/${gameId}`, username);
+    this.socketClient.send(`/app/game/get/${gameId}`, {});
   }
 }

@@ -4,7 +4,7 @@ import * as SockJS from 'sockjs-client';
 import { SocketClientState } from './socket-client-state.model';
 import {Injectable, OnDestroy} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {filter, first, map, switchMap} from 'rxjs/operators';
+import {filter, first, switchMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -56,13 +56,9 @@ export class SocketClientService implements OnDestroy {
     return this.onMessage(topic, SocketClientService.textHandler);
   }
 
-  send(topic: string, payload: any): Observable<any> {
-    return this.connect()
-      .pipe(
-        first(),
-        map((inst) => {
-          return inst.send(topic, {}, payload);
-        })
-      );
+  send(topic: string, payload: any): void {
+    this.connect()
+      .pipe(first())
+      .subscribe(inst => inst.send(topic, {}, payload));
   }
 }

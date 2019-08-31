@@ -20,7 +20,7 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private gameService: GameListService,
+              private gameListService: GameListService,
               private router: Router) {
     super();
   }
@@ -31,9 +31,9 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       username: ['', Validators.required]
     });
 
-    this.gameService.init();
+    this.gameListService.init();
 
-    this.gameList$ = this.gameService.findAll().pipe(
+    this.gameList$ = this.gameListService.findAll().pipe(
       map((games) => {
         return games.map((game) => {
           let desc = '';
@@ -66,14 +66,14 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       return;
     }
 
-    this.gameService.create().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
-      this.gameService.init();
-      this.router.navigateByUrl('/game-start', { state: {startedGame: game, asHost: true}}).then(() => {
+    this.gameListService.create().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
+      this.gameListService.init();
+      this.router.navigateByUrl('/game-start', { state: {gameId: game.gameId, asHost: true}}).then(() => {
         this.onReset();
       });
     });
 
-    this.gameService.save(this.registerForm.value.username);
+    this.gameListService.save(this.registerForm.value.username);
     this.onReset();
   }
 
@@ -83,15 +83,9 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   }
 
   onJoining(game: Game) {
-    this.gameService.getGame(game.gameId).pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe((startedGame) => {
-      this.gameService.init();
-      this.router.navigateByUrl('/game-start', { state: {startedGame, asHost: false }}).then(() => {
-        this.onReset();
-      });
+    this.gameListService.join(game.gameId, this.registerForm.value.username);
+    this.router.navigateByUrl('/game-start', {state: {gameId: game.gameId, asHost: false }}).then(() => {
+      this.onReset();
     });
-
-    this.gameService.join(game.gameId, this.registerForm.value.username);
   }
 }
