@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {StartedGame} from '../app.model';
 import {GameStartService} from './game-start.service';
 import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
+import {AppService} from '../app.service';
 
 @Component({
   selector: 'app-game-start',
@@ -14,9 +15,12 @@ import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destro
 export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
   startedGame$: Observable<StartedGame> = of();
   asHost: boolean;
+  ownerUsername: string;
+  guestUsername: string;
 
   constructor(private location: Location,
-              private gameStartService: GameStartService) {
+              private gameStartService: GameStartService,
+              private appService: AppService) {
     super();
   }
 
@@ -25,7 +29,7 @@ export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
     if (state && ('gameId' in state) && ('asHost' in state)) {
       this.asHost = state.asHost;
       this.startedGame$ = this.gameStartService.getGame(state.gameId);
-      this.gameStartService.watch(state.gameId);
+      this.appService.watch(state.gameId);
     }
   }
 }

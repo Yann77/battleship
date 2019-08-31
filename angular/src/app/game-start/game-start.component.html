@@ -1,12 +1,23 @@
-<div class="container" *ngIf="(startedGame$ | async) as startedGame">
+<ng-container class="container" *ngIf="(startedGame$ | async) as startedGame">
+  <h2 class="pt-2" *ngIf="startedGame.guest">{{ asHost ? startedGame.host.username : startedGame.guest.username }} vs {{ asHost ? startedGame.guest.username : startedGame.host.username }} STARTED !!!</h2>
+  <div class="pt-2" *ngIf="!startedGame.guest">Waiting for an opponent...</div>
   <div class="row align-content-between">
     <div class="col p-1">
-      <h3>Your Game</h3>
+      <h3 class="col p-1 align-text">
+      YOUR BOARD: {{asHost ? startedGame.host.username : startedGame.guest?.username}}
+      </h3>
+    </div>
+    <div class="col p-1"><h3 *ngIf="startedGame.guest && startedGame.host" class="col p-1 align-text">
+      ENEMY BOARD: {{asHost ? startedGame.guest?.username : startedGame.host.username}}
+    </h3></div>
+  </div>
+  <div class="row align-content-between">
+    <div class="col p-1">
       <app-board [boardData]="asHost ? startedGame.host : startedGame.guest"></app-board>
     </div>
     <div class="col p-1">
-      <h3>Buddy Game</h3>
       <app-board [boardData]="asHost ? startedGame.guest : startedGame.host"></app-board>
     </div>
   </div>
-</div>
+
+</ng-container>

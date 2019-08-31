@@ -14,10 +14,6 @@ export class GameListService extends TakeUntilDestroyed {
     super();
   }
 
-  init(): void {
-    this.socketClient.send( `/app/game/get`, {});
-  }
-
   save(username: string): void {
     this.socketClient.send(`/app/game/create`, username);
   }

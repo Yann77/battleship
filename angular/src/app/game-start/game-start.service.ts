@@ -13,10 +13,6 @@ export class GameStartService extends TakeUntilDestroyed {
     super();
   }
 
-  watch(gameId): void {
-    this.socketClient.send(`/app/game/get/${gameId}`, {});
-  }
-
   fire(gameId, x, y): void {
     this.socketClient.send(`/app/game/get/${gameId}`, { coordinateX: x, coordinateY: y } as CellCoord);
   }
