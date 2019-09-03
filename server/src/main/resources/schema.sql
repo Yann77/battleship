@@ -16,7 +16,9 @@ create table cell (
                        touched      boolean DEFAULT FALSE NOT NULL,
                        type        varchar(64),
                        cord_x      integer,
-                       cord_y      integer);
+                       cord_y      integer,
+                       startCell   boolean,
+                       horizontal  boolean);
 
 
 alter table game add foreign key (host) references board(id);
