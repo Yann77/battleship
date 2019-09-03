@@ -1,38 +1,29 @@
 <div class="container-fluid">
-  <div class="battleground-container">
-    <div class="row" *ngFor="let row of boardCells; index as rowIndex">
-      <div class="col" *ngFor="let cell of boardCells[rowIndex]; index as colIndex">
-        <!-- <div class="boardCell">{{rowIndex}}, {{colIndex}}</div> -->
-        <div class="tile">
-          <div *ngIf="rowIndex === 8 && colIndex === 0" class="aircraft_carrier_vertical"></div>
-          <div *ngIf="rowIndex === 2 && colIndex === 3" class="submarine_vertical"></div>
-          <div *ngIf="rowIndex === 0 && colIndex === 0" class="shot-missed"></div>
-          <div *ngIf="rowIndex === 5 && colIndex === 6" class="shot-missed"></div>
-          <div *ngIf="rowIndex === 0 && colIndex === 9" class="shot-missed"></div>
-          <div *ngIf="rowIndex === 5 && colIndex === 2" class="shot-missed"></div>
-          <div *ngIf="rowIndex === 1 && colIndex === 5" class="shot-missed"></div>
-          <div *ngIf="rowIndex === 7 && colIndex === 5" class="shot-missed"></div>
-          <div *ngIf="rowIndex === 1 && colIndex === 0" class="cruiser_horizontal"></div>
-          <div *ngIf="rowIndex === 1 && colIndex === 0" class="explosion"></div>
-          <div *ngIf="rowIndex === 2 && colIndex === 0" class="explosion"></div>
-          <div *ngIf="rowIndex === 3 && colIndex === 0" class="explosion"></div>
-          <div *ngIf="rowIndex === 4 && colIndex === 7" class="destroyer_horizontal"></div>
-          <div *ngIf="rowIndex === 3 && colIndex === 2" class="torpedo_horizontal"></div>
-          <div *ngIf="rowIndex === 8 && colIndex < 5" class="explosion"></div>
-          <img class="gif" src="../assets/images/water_tile.gif">
+  <div class="ui-kit-container">
+    <div class="battleground-container">
+      <div class="row" *ngFor="let row of boardCells; index as rowIndex">
+        <div class="col" *ngFor="let cell of boardCells[rowIndex]; index as colIndex">
+          <!-- <div class="boardCell">{{rowIndex}}, {{colIndex}}</div> -->
+          <div class="tile">
+            <div *ngIf="rowIndex === 8 && colIndex === 0" class="aircraft_carrier_vertical"></div>
+            <div *ngIf="rowIndex === 2 && colIndex === 3" class="submarine_vertical"></div>
+            <div *ngIf="rowIndex === 0 && colIndex === 0" class="shot-missed"></div>
+            <div *ngIf="rowIndex === 5 && colIndex === 6" class="shot-missed"></div>
+            <div *ngIf="rowIndex === 0 && colIndex === 9" class="shot-missed"></div>
+            <div *ngIf="rowIndex === 5 && colIndex === 2" class="shot-missed"></div>
+            <div *ngIf="rowIndex === 1 && colIndex === 5" class="shot-missed"></div>
+            <div *ngIf="rowIndex === 7 && colIndex === 5" class="shot-missed"></div>
+            <div *ngIf="rowIndex === 1 && colIndex === 0" class="cruiser_horizontal"></div>
+            <div *ngIf="rowIndex === 1 && colIndex === 0" class="explosion"></div>
+            <div *ngIf="rowIndex === 2 && colIndex === 0" class="explosion"></div>
+            <div *ngIf="rowIndex === 3 && colIndex === 0" class="explosion"></div>
+            <div *ngIf="rowIndex === 4 && colIndex === 7" class="destroyer_horizontal"></div>
+            <div *ngIf="rowIndex === 3 && colIndex === 2" class="torpedo_horizontal"></div>
+            <div *ngIf="rowIndex === 8 && colIndex < 5" class="explosion"></div>
+            <img class="gif" src="../assets/images/water_tile.gif">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="ship-container">
-    <img src="../assets/images/orange_submarine.gif">
-    <img src="../assets/images/submarine_horizontal.gif">
-    <img src="../assets/images/aircraft_carrier_horizontal.gif">
-    <img src="../assets/images/croiseur_horizontal.gif">
-    <img src="../assets/images/destroyer_horizontal.gif">
-    <img src="../assets/images/torpedo_horizontal.gif">
-    <img src="../assets/images/explosion.gif">
-    <img src="../assets/images/miss_shot.gif">
-    <img class="gif" src="../assets/images/water_tile.gif">
   </div>
 </div>

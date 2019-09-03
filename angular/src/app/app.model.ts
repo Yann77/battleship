@@ -1,7 +1,17 @@
 export enum GameStatus {
   CREATED = 'CREATED',
-  STARTED = 'STARTED',
+  HOST = 'HOST',
+  GUEST = 'GUEST',
   ENDED = 'ENDED'
+}
+
+export enum BoatType {
+  CARRIER = 'CARRIER',
+  BATTLESHIP = 'BATTLESHIP',
+  DESTROYER = 'DESTROYER',
+  SUBMARINE = 'SUBMARINE',
+  PATROL_BOAT = 'PATROL_BOAT'
+
 }
 
 export interface Game {

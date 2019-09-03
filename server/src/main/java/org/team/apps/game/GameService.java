@@ -36,7 +36,6 @@ public class GameService {
 			gameRepository.save(game);
 
 			return game;
-//			return gameRepository.findAll();
 		}
 		catch (Exception e) {
 			System.out.println(e);
