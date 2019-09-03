@@ -112,4 +112,14 @@ public class Cell {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		return "Cell{\n" +
+				"type='" + type + '\'' +
+				",\n coordinateX=" + coordinateX +
+				",\n coordinateY=" + coordinateY +
+				",\n startCell=" + startCell +
+				",\n horizontal=" + horizontal +
+				"}\n";
+	}
 }
