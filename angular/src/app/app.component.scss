@@ -1,12 +1,13 @@
 .header {
-  height: 50px;
+  height: 440px;
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
 
   .game-logo {
-    height: 50px;
-    width : 215px;
+    height: 420px;
+    width : 585px;
+    //background-image: url('../assets/images/badge_background.png');
   }
 }
 
