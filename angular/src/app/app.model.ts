@@ -4,6 +4,14 @@ export enum GameStatus {
   ENDED = 'ENDED'
 }
 
+export enum ShipType {
+  CARRIER = 'CARRIER',
+  BATTLESHIP = 'BATTLESHIP',
+  DESTROYER = 'DESTROYER',
+  SUBMARINE = 'SUBMARINE',
+  PATROL_BOAT = 'PATROL_BOAT'
+}
+
 export interface Game {
   gameId: number;
   status: GameStatus;

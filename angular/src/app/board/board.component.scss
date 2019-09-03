@@ -1,6 +1,4 @@
 .battleground-container{
-  display: flex;
-  flex-direction: row;
   max-width: 520px;
   max-height: 520px;
 }
@@ -65,7 +63,7 @@
     background-image: url('../../assets/images/submarine_vertical.gif');
   }
 
-  .cruiser_horizontal {
+  .battleship_horizontal {
     position: absolute;
     left: 5px;
     z-index: 100;
@@ -74,7 +72,7 @@
     background-image: url('../../assets/images/croiseur_horizontal.gif');
   }
 
-  .cruiser_vertical {
+  .battleship_vertical {
     position: absolute;
     left: 0px;
     z-index: 100;
@@ -101,7 +99,7 @@
     background-image: url('../../assets/images/destroyer_vertical.gif');
   }
 
-  .torpedo_horizontal {
+  .patrol_boat_horizontal {
     position: absolute;
     left: 5px;
     z-index: 100;
@@ -110,7 +108,7 @@
     background-image: url('../../assets/images/torpedo_horizontal.gif');
   }
 
-  .torpedo_vertical {
+  .patrol_boat_vertical {
     position: absolute;
     left: 0px;
     z-index: 100;

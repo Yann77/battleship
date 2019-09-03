@@ -2,11 +2,14 @@
   <div class="row align-content-between">
     <div class="col p-1">
       <h3>Your Game</h3>
-      <app-board [boardData]="asHost ? startedGame.host : startedGame.guest"></app-board>
+      <app-board [boardData]="asHost ? startedGame.host : startedGame.guest"
+                 [asHost]="true">
+      </app-board>
     </div>
     <div class="col p-1">
       <h3>Buddy Game</h3>
-      <app-board [boardData]="asHost ? startedGame.guest : startedGame.host"></app-board>
+      <app-board [boardData]="asHost ? startedGame.guest : startedGame.host"
+                 [asHost]="false"></app-board>
     </div>
   </div>
 </div>
