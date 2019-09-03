@@ -14,6 +14,7 @@ import org.springframework.util.StringUtils;
 public class GameService {
 
 	private final static long ALL_BOATS_HIT = 17;
+	private final static String MISSED = "MISSED";
 
 	private GameRepository gameRepository;
 	private BoardRepository boardRepository;
@@ -102,7 +103,7 @@ public class GameService {
 			//Throw an error, maybe on the error channel response
 		}
 
-		if(boardAttacked != null && boardAttacked.getCellList().stream().filter(boardCell -> boardCell.getTouched()).count() == ALL_BOATS_HIT){
+		if (boardAttacked != null && boardAttacked.getCellList().stream().filter(boardCell -> boardCell.getTouched()).count() == ALL_BOATS_HIT) {
 			newGameStatus = GameStatus.ENDED.name();
 		}
 
@@ -122,7 +123,8 @@ public class GameService {
 		});
 
 		//add missed hit if no boat touched
-		if(miss.get()){
+		if (miss.get()) {
+			cell.setType(MISSED);
 			currentCells.add(cell);
 			board.setCellList(currentCells);
 		}
