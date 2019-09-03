@@ -51,4 +51,12 @@ public class Board {
 		this.username = username;
 	}
 
+	@Override
+	public String toString() {
+		return "Board{" +
+				"id=" + id +
+				", cellList=" + cellList +
+				", username='" + username + '\'' +
+				'}';
+	}
 }
