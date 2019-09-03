@@ -1,6 +1,7 @@
 export enum GameStatus {
   CREATED = 'CREATED',
-  STARTED = 'STARTED',
+  HOST = 'HOST',
+  GUEST = 'GUEST',
   ENDED = 'ENDED'
 }
 

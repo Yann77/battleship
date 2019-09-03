@@ -6,6 +6,7 @@ import {map, takeUntil} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Game, GameStatus} from '../app.model';
 import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
+import {AppService} from '../app.service';
 
 @Component({
   selector: 'app-game-list',
@@ -20,7 +21,8 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   submitted = false;
 
   constructor(private formBuilder: FormBuilder,
-              private gameService: GameListService,
+              private gameListService: GameListService,
+              private appService: AppService,
               private router: Router) {
     super();
   }
@@ -31,9 +33,9 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       username: ['', Validators.required]
     });
 
-    this.gameService.init();
+    this.appService.watch();
 
-    this.gameList$ = this.gameService.findAll().pipe(
+    this.gameList$ = this.gameListService.findAll().pipe(
       map((games) => {
         return games.map((game) => {
           let desc = '';
@@ -42,8 +44,12 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
             case GameStatus.CREATED:
               desc = !game.guest ? '1 missing player to start...' : 'Should start soon...';
               break;
-            case GameStatus.STARTED:
-              desc = 'started at ';
+            case GameStatus.HOST:
+              desc = 'host is playing since ';
+              gameDt = new Date().toISOString();
+              break;
+            case GameStatus.GUEST:
+              desc = 'guest is playing since ';
               gameDt = new Date().toISOString();
               break;
             case GameStatus.ENDED:
@@ -66,14 +72,14 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       return;
     }
 
-    this.gameService.create().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
-      this.gameService.init();
-      this.router.navigateByUrl('/game-start', { state: {startedGame: game, asHost: true}}).then(() => {
+    this.gameListService.create().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
+      this.appService.watch();
+      this.router.navigateByUrl('/game-start', { state: {gameId: game.gameId, asHost: true}}).then(() => {
         this.onReset();
       });
     });
 
-    this.gameService.save(this.registerForm.value.username);
+    this.gameListService.save(this.registerForm.value.username);
     this.onReset();
   }
 
@@ -83,15 +89,16 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   }
 
   onJoining(game: Game) {
-    this.gameService.getGame(game.gameId).pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe((startedGame) => {
-      this.gameService.init();
-      this.router.navigateByUrl('/game-start', { state: {startedGame, asHost: false }}).then(() => {
-        this.onReset();
-      });
+    this.gameListService.join(game.gameId, this.registerForm.value.username);
+    this.router.navigateByUrl('/game-start', {state: {gameId: game.gameId, asHost: false }}).then(() => {
+      this.onReset();
     });
+  }
 
-    this.gameService.join(game.gameId, this.registerForm.value.username);
+  showGame(gameId: number) {
+    this.appService.watch();
+    this.router.navigateByUrl('/game-start', {state: {gameId, asHost: false }}).then(() => {
+      this.onReset();
+    });
   }
 }

@@ -21,15 +21,15 @@ public class RandomShipGenerator {
 		board.setCellList(allBoatsCells);
 
 		long endTime = System.currentTimeMillis();
-		System.out.println("Board generation : "+ (endTime - startTime));
+		System.out.println("Board generation : " + (endTime - startTime));
 		return board;
 	}
 
-	private static List<Cell> generateBoatPositionWithoutCollision(ShipType shipType, List<Cell> allBoatsCells){
+	private static List<Cell> generateBoatPositionWithoutCollision(ShipType shipType, List<Cell> allBoatsCells) {
 		List<Cell> oneBoatCells = new ArrayList<>();
 		boolean collision = true;
 
-		while(collision) {
+		while (collision) {
 			int startCoordLimit = generator.nextInt(10 - shipType.size);
 			int startCoordOther = generator.nextInt(10);
 			boolean isHorizontal = isHorizontal();
@@ -40,9 +40,9 @@ public class RandomShipGenerator {
 				oneBoatCells.add(cell);
 			}
 
-			for(Cell boatAlreadyCreated : allBoatsCells){
-				for(Cell newBoat : oneBoatCells){
-					if(newBoat.compareCoordinate(boatAlreadyCreated.getCoordinateX(), boatAlreadyCreated.getCoordinateY())){
+			for (Cell boatAlreadyCreated : allBoatsCells) {
+				for (Cell newBoat : oneBoatCells) {
+					if (newBoat.compareCoordinate(boatAlreadyCreated.getCoordinateX(), boatAlreadyCreated.getCoordinateY())) {
 						break;
 					}
 				}
@@ -54,7 +54,9 @@ public class RandomShipGenerator {
 	}
 
 	private static Cell setCell(Boolean isHorizontal, int i, int startCoordLimit, int startCoordOther, String shipName) {
-		return (isHorizontal) ? new Cell(shipName, startCoordLimit + i, startCoordOther) : new Cell(shipName, startCoordOther, startCoordLimit + i);
+		Boolean startCell = (i == 0) ? true : false;
+
+		return (isHorizontal) ? new Cell(shipName, startCoordLimit + i, startCoordOther, startCell, true) : new Cell(shipName, startCoordOther, startCoordLimit + i, startCell, false);
 	}
 
 	private static boolean isHorizontal() {
