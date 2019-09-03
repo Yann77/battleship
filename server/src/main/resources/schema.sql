@@ -8,17 +8,17 @@ create table game (
     status      varchar(64));
 
 create table board (
-                      id          integer identity primary key,
-                      username        varchar(64));
+                      id            integer identity primary key,
+                      username      varchar(64));
 create table cell (
-                       id    integer identity primary key,
+                       id           integer identity primary key,
                        board_id     integer,
                        touched      boolean DEFAULT FALSE NOT NULL,
-                       type        varchar(64),
-                       cord_x      integer,
-                       cord_y      integer,
-                       startCell   boolean,
-                       horizontal  boolean);
+                       type         varchar(64),
+                       cord_x       integer,
+                       cord_y       integer,
+                       start_cell   boolean,
+                       horizontal   boolean);
 
 
 alter table game add foreign key (host) references board(id);

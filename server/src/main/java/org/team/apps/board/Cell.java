@@ -37,6 +37,7 @@ public class Cell {
 	@Column(name = "cord_y")
 	private Integer coordinateY;
 
+	@Column(name = "start_cell")
 	private Boolean startCell;
 
 	private Boolean horizontal;
