@@ -1,28 +1,16 @@
 <div class="container-fluid">
-  <div class="ui-kit-container">
-    <div class="battleground-container">
-      <div class="row" *ngFor="let row of boardCells; index as rowIndex">
-        <div class="col" *ngFor="let cell of boardCells[rowIndex]; index as colIndex">
-          <!-- <div class="boardCell">{{rowIndex}}, {{colIndex}}</div> -->
-          <div class="tile">
-            <div *ngIf="rowIndex === 8 && colIndex === 0" class="aircraft_carrier_vertical"></div>
-            <div *ngIf="rowIndex === 2 && colIndex === 3" class="submarine_vertical"></div>
-            <div *ngIf="rowIndex === 0 && colIndex === 0" class="shot-missed"></div>
-            <div *ngIf="rowIndex === 5 && colIndex === 6" class="shot-missed"></div>
-            <div *ngIf="rowIndex === 0 && colIndex === 9" class="shot-missed"></div>
-            <div *ngIf="rowIndex === 5 && colIndex === 2" class="shot-missed"></div>
-            <div *ngIf="rowIndex === 1 && colIndex === 5" class="shot-missed"></div>
-            <div *ngIf="rowIndex === 7 && colIndex === 5" class="shot-missed"></div>
-            <div *ngIf="rowIndex === 1 && colIndex === 0" class="cruiser_horizontal"></div>
-            <div *ngIf="rowIndex === 1 && colIndex === 0" class="explosion"></div>
-            <div *ngIf="rowIndex === 2 && colIndex === 0" class="explosion"></div>
-            <div *ngIf="rowIndex === 3 && colIndex === 0" class="explosion"></div>
-            <div *ngIf="rowIndex === 4 && colIndex === 7" class="destroyer_horizontal"></div>
-            <div *ngIf="rowIndex === 3 && colIndex === 2" class="torpedo_horizontal"></div>
-            <div *ngIf="rowIndex === 8 && colIndex < 5" class="explosion"></div>
-            <img class="gif" src="../assets/images/water_tile.gif">
-          </div>
-        </div>
+  <div class="battleground-container">
+    <div class="row" *ngFor="let r of defaultBoardCells; index as y">
+      <div class="col tile" *ngFor="let c of defaultBoardCells[y]; index as x">
+        <ng-container *ngIf="getCell(x, y) as cell; else waterCell">
+          <div [class]="getShipClass(cell.coordinateX, cell.coordinateY, cell.type)"></div>
+          <div [ngClass]="cell.touched ? 'explosion' : null"></div>
+          <div [ngClass]="!cell.touched && !cell.type ? 'shot-missed' : null"></div>
+          <img class="gif" src="../assets/images/water_tile.gif">
+        </ng-container>
+        <ng-template #waterCell>
+          <img class="gif" src="../assets/images/water_tile.gif">
+        </ng-template>
       </div>
     </div>
   </div>

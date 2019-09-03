@@ -15,8 +15,6 @@ import {AppService} from '../app.service';
 export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
   startedGame$: Observable<StartedGame> = of();
   asHost: boolean;
-  ownerUsername: string;
-  guestUsername: string;
 
   constructor(private location: Location,
               private gameStartService: GameStartService,

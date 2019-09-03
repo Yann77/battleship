@@ -32,7 +32,7 @@ export interface Board {
 export interface Cell {
   coordinateY: number;
   coordinateX: number;
-  type: string;
+  type: ShipType;
   touched: boolean;
 }
 
