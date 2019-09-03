@@ -23,16 +23,16 @@ public class GameController {
 	private GameService gameService;
 
 	@MessageMapping("/game/create")
-	@SendTo("/topic/game/created")
+	@SendToUser("/topic/game/created")
 	public Game create(String username) {
-		System.out.println("Creating a game for " + username);
+		logger.info(String.format("Creating a game for: [%s]", username));
 		return gameService.create(username);
 	}
 
 	@MessageMapping("/game/join/{gameId}")
 	@SendTo("/topic/game/get/{gameId}")
 	public Game join(@DestinationVariable("gameId") Integer gameId, String username) {
-		System.out.println("Joining game : "+ gameId);
+		logger.info(String.format("Joining game : [%s]", gameId));
 		return gameService.joinGame(gameId, username);
 	}
 

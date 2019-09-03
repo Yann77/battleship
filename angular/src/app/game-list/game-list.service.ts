@@ -26,7 +26,7 @@ export class GameListService extends TakeUntilDestroyed {
 
   create(): Observable<Game> {
     return this.socketClient
-    .onMessage(`/topic/game/created`)
+    .onMessage(`/user/topic/game/created`)
     .pipe(map((game) => game));
   }
 
