@@ -5,6 +5,15 @@
   max-height: 520px;
 }
 
+.ui-kit-container{
+  width: 540px;
+  height: 540px;
+  padding-left: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  background-image: url('../../assets/images/metal_board_background.png');
+}
+
 .tile{
   position: relative;
   box-sizing: border-box;
