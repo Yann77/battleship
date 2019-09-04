@@ -1,3 +1,6 @@
+<nav class="links" mat-tab-nav-bar>
+  <a mat-tab-link routerLink="/game-list">Games</a>
+</nav>
 <ng-container class="container" *ngIf="(startedGame$ | async) as startedGame">
   <h2 class="pt-2" *ngIf="startedGame.guest">{{ asHost ? startedGame.host.username : startedGame.guest.username }} vs {{ asHost ? startedGame.guest.username : startedGame.host.username }} STARTED !!!</h2>
   <div class="pt-2" *ngIf="!startedGame.guest">Waiting for an opponent...</div>

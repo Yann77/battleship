@@ -32,6 +32,5 @@ export class GameListService extends TakeUntilDestroyed {
 
   join(gameId: number, username: string): void {
     this.socketClient.send(`/app/game/join/${gameId}`, username);
-    this.socketClient.send(`/app/game/get/${gameId}`, {});
   }
 }

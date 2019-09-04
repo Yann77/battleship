@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {Board, Cell, ShipType} from '../app.model';
+import {Orientations, ShipCellInfo} from './board.model';
 
 export const DEFAULT_MATRIX_SIZE = 10;
 
@@ -10,7 +11,7 @@ export const DEFAULT_MATRIX_SIZE = 10;
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnChanges {
   @Input()
   boardData: Board;
 
@@ -26,14 +27,19 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.boardData && this.boardData.cellList) {
-      this.boardData.cellList.map((cell) => this.boardDataCells.set(`${cell.coordinateX}|${cell.coordinateY}`, cell));
-    }
-
     for (let i = 0; i < this.matrixSize; i++) {
       this.defaultBoardCells[i] = [];
       for (let j = 0; j < this.matrixSize; j++) {
         this.defaultBoardCells[i][j] = {coordinateX: j, coordinateY: i, type: undefined, touched: false} as Cell;
+      }
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.boardData && changes.boardData.currentValue) {
+      const boardData = changes.boardData.currentValue;
+      if (boardData && boardData.cellList) {
+        boardData.cellList.map((cell) => this.boardDataCells.set(`${cell.coordinateX}|${cell.coordinateY}`, cell));
       }
     }
   }
@@ -62,26 +68,24 @@ export class BoardComponent implements OnInit {
         shipClass = 'submarine';
         break;
     }
-    if (this.isHorizontalShip(x, y)) {
-      shipClassCss[shipClass.toLowerCase() + '_horizontal'] = true;
-    } else {
-      shipClassCss[shipClass.toLowerCase() + '_vertical'] = true;
+
+    const shipCellInfo: ShipCellInfo = this.isFirstShipCellSequence(x, y);
+    if (shipCellInfo.isFirstShipCellSequence) {
+      if (shipCellInfo.orientation === Orientations.HORIZONTAL) {
+        shipClassCss[shipClass.toLowerCase() + '_horizontal'] = true;
+      } else {
+        shipClassCss[shipClass.toLowerCase() + '_vertical'] = true;
+      }
     }
     return shipClassCss;
   }
 
-  private isHorizontalShip(x: number, y: number): boolean {
+  private isFirstShipCellSequence(x: number, y: number): ShipCellInfo {
     let topType;
-    let bottomType;
     let leftType;
     let rightType;
     const currentCell = this.boardDataCells.get(`${x}|${y}`);
-    const currentType = currentCell && currentCell || undefined;
-
-    if (y < DEFAULT_MATRIX_SIZE - 1) {
-      const bottomCell = this.boardDataCells.get(`${x}|${y + 1}`);
-      bottomType = bottomCell && bottomCell.type || undefined;
-    }
+    const currentType = currentCell && currentCell.type || undefined;
 
     if (y > 0) {
       const topCell = this.boardDataCells.get(`${x}|${y - 1}`);
@@ -98,7 +102,18 @@ export class BoardComponent implements OnInit {
       leftType = leftCell && leftCell.type || undefined;
     }
 
-    return currentType && ((!leftType && rightType) || (leftType && !rightType)) &&
-      (!bottomType || bottomType !== currentType) && (!topType || topType !== currentType);
+    const orientation = currentType &&
+      ((leftType && leftType === currentType) || (rightType && rightType === currentType)) ?
+      Orientations.HORIZONTAL : Orientations.VERTICAL;
+
+    let isFirstShipCellSequence;
+    if (orientation === Orientations.HORIZONTAL) {
+      isFirstShipCellSequence = currentType &&
+        (!leftType || leftType !== currentType);
+    } else {
+      isFirstShipCellSequence = currentType &&
+        (!topType || topType !== currentType);
+    }
+    return {isFirstShipCellSequence, orientation} as ShipCellInfo;
   }
 }

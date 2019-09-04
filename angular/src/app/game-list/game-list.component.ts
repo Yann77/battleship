@@ -94,11 +94,4 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       this.onReset();
     });
   }
-
-  showGame(gameId: number) {
-    this.appService.watch();
-    this.router.navigateByUrl('/game-start', {state: {gameId, asHost: false }}).then(() => {
-      this.onReset();
-    });
-  }
 }
