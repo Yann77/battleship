@@ -11,12 +11,19 @@
       ENEMY BOARD: {{asHost ? startedGame.guest?.username : startedGame.host.username}}
     </h3></div>
   </div>
-  <div class="row align-content-between">
-    <div class="col p-1">
-      <app-board [boardData]="asHost ? startedGame.host : startedGame.guest"
+
+  <div class="d-flex">
+    <div class="ui-kit-container">
+      <app-board class="left-board" [boardData]="asHost ? startedGame.host : startedGame.guest"
                  [asHost]="true"></app-board>
+      <div class="metal-handle"></div>
+      <div class="bullet-hole bullet-hole-1"></div>
+      <div class="bullet-hole bullet-hole-2"></div>
+      <div class="speaker">
+        <img width="150" src="../assets/images/speaker.png" alt="Speaker"/>
+      </div>
     </div>
-    <div class="col p-1">
+    <div class="ui-kit-container">
       <app-board [boardData]="asHost ? startedGame.guest : startedGame.host"
                  [asHost]="false"></app-board>
     </div>

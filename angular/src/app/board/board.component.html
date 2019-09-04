@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid px-0 pt-1">
   <div class="battleground-container">
-    <div class="row" *ngFor="let r of defaultBoardCells; index as y">
+    <div class="row no-gutters" *ngFor="let r of defaultBoardCells; index as y">
       <div class="col tile" *ngFor="let c of defaultBoardCells[y]; index as x">
         <ng-container *ngIf="getCell(x, y) as cell; else waterCell">
           <div [class]="getShipClass(cell.coordinateX, cell.coordinateY, cell.type)"></div>
