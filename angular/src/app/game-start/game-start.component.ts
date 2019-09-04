@@ -27,7 +27,7 @@ export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
     if (state && ('gameId' in state) && ('asHost' in state)) {
       this.asHost = state.asHost;
       this.startedGame$ = this.gameStartService.getGame(state.gameId);
+      this.appService.watch(state.gameId);
     }
-    this.appService.watch(state.gameId);
   }
 }

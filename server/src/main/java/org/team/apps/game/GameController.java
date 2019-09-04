@@ -30,7 +30,7 @@ public class GameController {
 	}
 
 	@MessageMapping("/game/join/{gameId}")
-	@SendTo("/topic/game/get/{gameId}")
+	@SendTo("/topic/game/joined")
 	public Game join(@DestinationVariable("gameId") Integer gameId, String username) {
 		System.out.println("Joining game : "+ gameId);
 		return gameService.joinGame(gameId, username);
