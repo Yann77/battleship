@@ -64,9 +64,7 @@ public class RandomShipGenerator {
 	}
 
 	private static Cell setCell(Boolean isHorizontal, int i, int startCoordLimit, int startCoordOther, String shipName) {
-		Boolean startCell = (i == 0) ? true : false;
-
-		return (isHorizontal) ? new Cell(shipName, startCoordLimit + i, startCoordOther, startCell, true) : new Cell(shipName, startCoordOther, startCoordLimit + i, startCell, false);
+		return (isHorizontal) ? new Cell(shipName, startCoordLimit + i, startCoordOther) : new Cell(shipName, startCoordOther, startCoordLimit + i);
 	}
 
 	private static boolean isHorizontal() {

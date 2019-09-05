@@ -124,10 +124,12 @@ public class GameService {
 
 		//add missed hit if no boat touched
 		if (miss.get()) {
+			cell.setTouched(false);
 			cell.setType(MISSED);
 			currentCells.add(cell);
-			board.setCellList(currentCells);
 		}
+
+		board.setCellList(currentCells);
 	}
 
 }

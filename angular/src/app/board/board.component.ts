@@ -1,4 +1,13 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  EventEmitter
+} from '@angular/core';
 import {Board, Cell, ShipType} from '../app.model';
 import {Orientations, ShipCellInfo} from './board.model';
 
@@ -16,10 +25,13 @@ export class BoardComponent implements OnInit, OnChanges {
   boardData: Board;
 
   @Input()
-  asHost: boolean;
+  isOwner = true;
 
   @Input()
   matrixSize = DEFAULT_MATRIX_SIZE;
+
+  @Output()
+  shipFired: EventEmitter<Cell> = new EventEmitter<Cell>();
 
   defaultBoardCells: Cell[][] = [];
   boardDataCells: Map<string, Cell> = new Map();
@@ -53,7 +65,7 @@ export class BoardComponent implements OnInit, OnChanges {
     const shipClassCss = {};
     switch (shipType) {
       case ShipType.BATTLESHIP:
-        shipClass = 'battleship'
+        shipClass = 'battleship';
         break;
       case ShipType.CARRIER:
         shipClass = 'aircraft_carrier';
@@ -78,6 +90,12 @@ export class BoardComponent implements OnInit, OnChanges {
       }
     }
     return shipClassCss;
+  }
+
+  onShipFired(cell: Cell) {
+    if (!this.isOwner) {
+      this.shipFired.emit(cell);
+    }
   }
 
   private isFirstShipCellSequence(x: number, y: number): ShipCellInfo {
