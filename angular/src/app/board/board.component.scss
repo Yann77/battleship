@@ -1,17 +1,6 @@
 .battleground-container{
-  display: flex;
-  flex-direction: row;
   max-width: 520px;
   max-height: 520px;
-}
-
-.ui-kit-container{
-  width: 560px;
-  height: 560px;
-  padding-left: 20px;
-  padding-top: 20px;
-  box-sizing: border-box;
-  background-image: url('../../assets/images/metal_board_background.png');
 }
 
 .tile{
@@ -74,22 +63,22 @@
     background-image: url('../../assets/images/submarine_vertical.gif');
   }
 
-  .cruiser_horizontal {
+  .battleship_horizontal {
     position: absolute;
     left: 5px;
     z-index: 100;
     height: 50px;
     width: 200px;
-    background-image: url('../../assets/images/croiseur_horizontal.gif');
+    background-image: url('../../assets/images/battleship_horizontal.gif');
   }
 
-  .cruiser_vertical {
+  .battleship_vertical {
     position: absolute;
     left: 0px;
     z-index: 100;
     height: 200px;
     width: 50px;
-    background-image: url('../../assets/images/croiseur_vertical.gif');
+    background-image: url('../../assets/images/battleship_vertical.gif');
   }
 
   .destroyer_horizontal {
@@ -110,22 +99,22 @@
     background-image: url('../../assets/images/destroyer_vertical.gif');
   }
 
-  .torpedo_horizontal {
+  .patrol_boat_horizontal {
     position: absolute;
     left: 5px;
     z-index: 100;
     height: 50px;
     width: 100px;
-    background-image: url('../../assets/images/torpedo_horizontal.gif');
+    background-image: url('../../assets/images/patrol_boat_horizontal.gif');
   }
 
-  .torpedo_vertical {
+  .patrol_boat_vertical {
     position: absolute;
     left: 0px;
     z-index: 100;
     height: 100px;
     width: 50px;
-    background-image: url('../../assets/images/torpedo_vertical.gif');
+    background-image: url('../../assets/images/patrol_boat_vertical.gif');
   }
 
   .aircraft_carrier_horizontal {

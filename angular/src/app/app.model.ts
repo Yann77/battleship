@@ -5,13 +5,12 @@ export enum GameStatus {
   ENDED = 'ENDED'
 }
 
-export enum BoatType {
+export enum ShipType {
   CARRIER = 'CARRIER',
   BATTLESHIP = 'BATTLESHIP',
   DESTROYER = 'DESTROYER',
   SUBMARINE = 'SUBMARINE',
   PATROL_BOAT = 'PATROL_BOAT'
-
 }
 
 export interface Game {
@@ -33,7 +32,7 @@ export interface Board {
 export interface Cell {
   coordinateY: number;
   coordinateX: number;
-  type: string;
+  type: ShipType;
   touched: boolean;
 }
 

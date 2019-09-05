@@ -72,15 +72,14 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
       return;
     }
 
-    this.gameListService.create().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
+    this.gameListService.created().pipe(takeUntil(this.destroyed$)).subscribe( (game) => {
       this.appService.watch();
       this.router.navigateByUrl('/game-start', { state: {gameId: game.gameId, asHost: true}}).then(() => {
         this.onReset();
       });
     });
 
-    this.gameListService.save(this.registerForm.value.username);
-    this.onReset();
+    this.gameListService.create(this.registerForm.value.username);
   }
 
   onReset() {
@@ -89,16 +88,13 @@ export class GameListComponent extends TakeUntilDestroyed implements OnInit {
   }
 
   onJoining(game: Game) {
-    this.gameListService.join(game.gameId, this.registerForm.value.username);
-    this.router.navigateByUrl('/game-start', {state: {gameId: game.gameId, asHost: false }}).then(() => {
-      this.onReset();
+    this.gameListService.joined().pipe(takeUntil(this.destroyed$)).subscribe( (g) => {
+      this.appService.watch();
+      this.router.navigateByUrl('/game-start', { state: {gameId: g.gameId, asHost: false}}).then(() => {
+        this.onReset();
+      });
     });
-  }
 
-  showGame(gameId: number) {
-    this.appService.watch();
-    this.router.navigateByUrl('/game-start', {state: {gameId, asHost: false }}).then(() => {
-      this.onReset();
-    });
+    this.gameListService.join(game.gameId, this.registerForm.value.username);
   }
 }

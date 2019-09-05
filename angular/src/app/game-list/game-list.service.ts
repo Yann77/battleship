@@ -14,7 +14,7 @@ export class GameListService extends TakeUntilDestroyed {
     super();
   }
 
-  save(username: string): void {
+  create(username: string): void {
     this.socketClient.send(`/app/game/create`, username);
   }
 
@@ -24,7 +24,7 @@ export class GameListService extends TakeUntilDestroyed {
       .pipe(map((games: GameOutputMessage) => games.games));
   }
 
-  create(): Observable<Game> {
+  created(): Observable<Game> {
     return this.socketClient
     .onMessage(`/user/topic/game/created`)
     .pipe(map((game) => game));
@@ -32,6 +32,11 @@ export class GameListService extends TakeUntilDestroyed {
 
   join(gameId: number, username: string): void {
     this.socketClient.send(`/app/game/join/${gameId}`, username);
-    this.socketClient.send(`/app/game/get/${gameId}`, {});
+  }
+
+  joined(): Observable<Game> {
+    return this.socketClient
+      .onMessage(`/topic/game/joined`)
+      .pipe(map((game) => game));
   }
 }

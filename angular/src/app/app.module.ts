@@ -16,10 +16,12 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from './core/core.module';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     BoardComponent,
     GameListComponent,
     GameStartComponent

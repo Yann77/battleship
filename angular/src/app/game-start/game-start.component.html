@@ -1,3 +1,6 @@
+<nav class="links" mat-tab-nav-bar>
+  <a mat-tab-link routerLink="/game-list">Games</a>
+</nav>
 <ng-container class="container" *ngIf="(startedGame$ | async) as startedGame">
   <h2 class="pt-2" *ngIf="startedGame.guest">{{ asHost ? startedGame.host.username : startedGame.guest.username }} vs {{ asHost ? startedGame.guest.username : startedGame.host.username }} STARTED !!!</h2>
   <div class="pt-2" *ngIf="!startedGame.guest">Waiting for an opponent...</div>
@@ -11,14 +14,22 @@
       ENEMY BOARD: {{asHost ? startedGame.guest?.username : startedGame.host.username}}
     </h3></div>
   </div>
-  <div class="row align-content-between">
-    <div class="col p-1">
-      <app-board [boardData]="asHost ? startedGame.host : startedGame.guest"></app-board>
+
+  <div class="d-flex">
+    <div class="ui-kit-container">
+      <app-board class="left-board" [boardData]="asHost ? startedGame.host : startedGame.guest"></app-board>
+      <div class="metal-handle"></div>
+      <div class="bullet-hole bullet-hole-1"></div>
+      <div class="bullet-hole bullet-hole-2"></div>
+      <div class="speaker">
+        <img width="150" src="../assets/images/speaker.png" alt="Speaker"/>
+      </div>
     </div>
-    <div class="col p-1">
-      <app-board [boardData]="asHost ? startedGame.guest : startedGame.host"></app-board>
+    <div class="ui-kit-container">
+      <app-board [boardData]="asHost ? startedGame.guest : startedGame.host"
+                 [isOwner]="false"
+                 (shipFired)="onShipFired($event, startedGame.gameId, startedGame.status)"></app-board>
     </div>
   </div>
 
 </ng-container>
-<app-board ></app-board>

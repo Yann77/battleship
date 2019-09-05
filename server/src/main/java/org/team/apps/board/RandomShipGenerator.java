@@ -5,7 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class RandomShipGenerator {
+
+	private final static Logger logger = LoggerFactory.getLogger(RandomShipGenerator.class);
 
 	private static final Random generator = new SecureRandom();
 
@@ -27,9 +32,10 @@ public class RandomShipGenerator {
 
 	private static List<Cell> generateBoatPositionWithoutCollision(ShipType shipType, List<Cell> allBoatsCells) {
 		List<Cell> oneBoatCells = new ArrayList<>();
-		boolean collision = true;
+		boolean collision;
 
-		while (collision) {
+		do {
+			collision = false;
 			int startCoordLimit = generator.nextInt(10 - shipType.size);
 			int startCoordOther = generator.nextInt(10);
 			boolean isHorizontal = isHorizontal();
@@ -43,20 +49,22 @@ public class RandomShipGenerator {
 			for (Cell boatAlreadyCreated : allBoatsCells) {
 				for (Cell newBoat : oneBoatCells) {
 					if (newBoat.compareCoordinate(boatAlreadyCreated.getCoordinateX(), boatAlreadyCreated.getCoordinateY())) {
+						logger.info("There is a collision : \n New boat : " + newBoat.getType() + " X:" + newBoat.getCoordinateX() + " Y:" + newBoat.getCoordinateY() +
+								"\nBoat from collision : " + boatAlreadyCreated.getType() + " X:" + boatAlreadyCreated.getCoordinateX() + " Y:" + boatAlreadyCreated.getCoordinateY());
+						oneBoatCells.clear();
+						collision = true;
 						break;
 					}
 				}
+				if (collision) break;
 			}
-			collision = false;
-		}
+		} while (collision);
 
 		return oneBoatCells;
 	}
 
 	private static Cell setCell(Boolean isHorizontal, int i, int startCoordLimit, int startCoordOther, String shipName) {
-		Boolean startCell = (i == 0) ? true : false;
-
-		return (isHorizontal) ? new Cell(shipName, startCoordLimit + i, startCoordOther, startCell, true) : new Cell(shipName, startCoordOther, startCoordLimit + i, startCell, false);
+		return (isHorizontal) ? new Cell(shipName, startCoordLimit + i, startCoordOther) : new Cell(shipName, startCoordOther, startCoordLimit + i);
 	}
 
 	private static boolean isHorizontal() {

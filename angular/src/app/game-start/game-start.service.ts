@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {SocketClientService} from '../core/socket-client.service';
-import {CellCoord, StartedGame} from '../app.model';
+import {StartedGame} from '../app.model';
 import {TakeUntilDestroyed} from '../core/take-until-destroyed/take-until-destroyed';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -13,8 +13,8 @@ export class GameStartService extends TakeUntilDestroyed {
     super();
   }
 
-  fire(gameId, x, y): void {
-    this.socketClient.send(`/app/game/get/${gameId}`, { coordinateX: x, coordinateY: y } as CellCoord);
+  fire(gameId, cell): void {
+    this.socketClient.send(`/app/game/fire/${gameId}`, cell);
   }
 
   getGame(gameId): Observable<StartedGame> {

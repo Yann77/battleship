@@ -13,12 +13,10 @@ public class Cell {
 	public Cell() {
 	}
 
-	public Cell(final String type, final Integer coordinateX, final Integer coordinateY, Boolean startCell, Boolean horizontal) {
+	public Cell(final String type, final Integer coordinateX, final Integer coordinateY) {
 		this.type = type;
 		this.coordinateX = coordinateX;
 		this.coordinateY = coordinateY;
-		this.startCell = startCell;
-		this.horizontal = horizontal;
 	}
 
 	@Id
@@ -37,33 +35,12 @@ public class Cell {
 	@Column(name = "cord_y")
 	private Integer coordinateY;
 
-	@Column(name = "start_cell")
-	private Boolean startCell;
-
-	private Boolean horizontal;
-
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Boolean getStartCell() {
-		return startCell;
-	}
-
-	public void setStartCell(final Boolean startCell) {
-		this.startCell = startCell;
-	}
-
-	public Boolean getHorizontal() {
-		return horizontal;
-	}
-
-	public void setHorizontal(final Boolean horizontal) {
-		this.horizontal = horizontal;
 	}
 
 	public Boolean getTouched() {
@@ -112,4 +89,12 @@ public class Cell {
 		return null;
 	}
 
+	@Override
+	public String toString() {
+		return "Cell{\n" +
+				"type='" + type + '\'' +
+				",\n coordinateX=" + coordinateX +
+				",\n coordinateY=" + coordinateY +
+				"}\n";
+	}
 }
