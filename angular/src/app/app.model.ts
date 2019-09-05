@@ -10,7 +10,8 @@ export enum ShipType {
   BATTLESHIP = 'BATTLESHIP',
   DESTROYER = 'DESTROYER',
   SUBMARINE = 'SUBMARINE',
-  PATROL_BOAT = 'PATROL_BOAT'
+  PATROL_BOAT = 'PATROL_BOAT',
+  MISSED = 'MISSED'
 }
 
 export interface Game {

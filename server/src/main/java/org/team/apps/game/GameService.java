@@ -123,13 +123,11 @@ public class GameService {
 	}
 
 	private void updateBoard(Board board, Cell cell) {
-		final AtomicBoolean miss = new AtomicBoolean(true);
 		List<Cell> currentCells = board.getCellList();
 		boolean found = false;
 		for (Cell boardCell: currentCells) {
 			if (boardCell.compareCoordinate(cell.getCoordinateX(), cell.getCoordinateY())) {
 				boardCell.setTouched(true);
-				miss.set(false);
 				found = true;
 			}
 		}

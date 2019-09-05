@@ -36,4 +36,34 @@ export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
       this.gameStartService.fire(gameId, cell);
     }
   }
+
+  getStatusMessage(startedGame: StartedGame) {
+    if (!startedGame.guest) {
+      return 'Waiting for an opponent...';
+    }
+    if (startedGame.status === GameStatus.ENDED) {
+      const winnerName = this.getWinnerName(startedGame);
+      if (winnerName) {
+        return 'The winner is ' + winnerName + ' !!!! Congrats !';
+      }
+      return 'Game is ENDED without a winner...'; // Should never happened
+    }
+    return this.asHost ? startedGame.host.username + ' VS ' + startedGame.guest.username :
+      startedGame.guest.username + ' VS ' + startedGame.host.username;
+  }
+
+  private getWinnerName(startedGame: StartedGame) {
+    if (this.areAllShipTouched(startedGame.host.cellList)) {
+      return startedGame.guest.username;
+    }
+    if (this.areAllShipTouched(startedGame.guest.cellList)) {
+      return startedGame.host.username;
+    }
+    return undefined;
+  }
+
+  private areAllShipTouched(cellList: Array<Cell>) {
+    return cellList.filter((cell) => cell.touched).length ===
+      cellList.filter(cell => cell.type && cell.type !== 'MISSED').length;
+  }
 }
