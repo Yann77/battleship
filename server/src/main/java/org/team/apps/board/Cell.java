@@ -24,7 +24,7 @@ public class Cell {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(insertable = false)
+	@Column
 	private Boolean touched;
 
 	private String type;
@@ -91,10 +91,11 @@ public class Cell {
 
 	@Override
 	public String toString() {
-		return "Cell{\n" +
-				"type='" + type + '\'' +
-				",\n coordinateX=" + coordinateX +
-				",\n coordinateY=" + coordinateY +
-				"}\n";
+		return "Cell{" +
+			"\n, touched=" + touched +
+			"\n, type='" + type + '\'' +
+			"\n, coordinateX=" + coordinateX +
+			"\n, coordinateY=" + coordinateY +
+			"\n}";
 	}
 }

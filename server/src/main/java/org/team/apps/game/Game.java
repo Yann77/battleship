@@ -61,4 +61,13 @@ public class Game {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return "Game{" +
+			"gameId=" + gameId +
+			", host=" + host +
+			", guest=" + guest +
+			", status='" + status + '\'' +
+			'}';
+	}
 }

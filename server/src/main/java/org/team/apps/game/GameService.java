@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.team.apps.board.Board;
 import org.team.apps.board.BoardRepository;
 import org.team.apps.board.Cell;
@@ -19,6 +21,8 @@ public class GameService {
 
 	private GameRepository gameRepository;
 	private BoardRepository boardRepository;
+
+	private final Logger logger = LoggerFactory.getLogger(GameService.class);
 
 	public GameService(GameRepository gameRepository, BoardRepository boardRepository) {
 		this.gameRepository = gameRepository;
@@ -73,7 +77,7 @@ public class GameService {
 		Game currentGame = gameRepository.findById(gameId).orElse(null);
 		if (currentGame != null) {
 			updateGameWithFire(currentGame, cell);
-			gameRepository.save(currentGame);
+			gameRepository.saveAndFlush(currentGame);
 		}
 
 		return currentGame;
@@ -86,6 +90,8 @@ public class GameService {
 	private void updateGameWithFire(Game game, Cell cell) {
 		Board boardAttacked = null;
 		String newGameStatus = game.getStatus();
+
+		System.out.println(game);
 
 		switch (game.getStatus()) {
 		case "HOST":
@@ -108,30 +114,31 @@ public class GameService {
 			newGameStatus = GameStatus.ENDED.name();
 		}
 
+		System.out.println(game);
+
 		game.setStatus(newGameStatus);
-		gameRepository.save(game);
+
+		boardRepository.save(boardAttacked);
+
 	}
 
 	private void updateBoard(Board board, Cell cell) {
 		final AtomicBoolean miss = new AtomicBoolean(true);
 		List<Cell> currentCells = board.getCellList();
-
-		List<Cell> updatedBoardCells = currentCells.stream().filter(boardCell -> {
+		boolean found = false;
+		for (Cell boardCell: currentCells) {
 			if (boardCell.compareCoordinate(cell.getCoordinateX(), cell.getCoordinateY())) {
 				boardCell.setTouched(true);
 				miss.set(false);
+				found = true;
 			}
-			return !StringUtils.isEmpty(boardCell.getType()) && boardCell.getTouched();
-		}).collect(Collectors.toList());
-
+		}
 		//add missed hit if no boat touched
-		if (miss.get()) {
+		if (!found) {
 			cell.setTouched(false);
 			cell.setType(MISSED);
-			updatedBoardCells.add(cell);
+			currentCells.add(cell);
 		}
-
-		board.setCellList(updatedBoardCells);
 	}
 
 }
