@@ -1,12 +1,13 @@
-app-board {
-  width: 100%;
-  height: 100%;
-}
-
 .left-board{
   position: absolute;
   top: 150px;
   left: 30px;
+}
+
+.right-board{
+  position: absolute;
+  top: 150px;
+  right: 30px;
 }
 
 .ui-kit-container{
@@ -36,8 +37,8 @@ app-board {
 
   &-1 {
     position: absolute;
-    left: 320px;
-    top: 30px;
+    left: 365px;
+    top: 50px;
   }
 
   &-2 {
@@ -53,4 +54,58 @@ app-board {
   bottom: 350px;
   width: 150px;
   height: 150px;
+}
+
+.radar{
+  position: absolute;
+  left: 30px;
+  bottom: 350px;
+  width: 150px;
+  height: 150px;
+}
+
+.red-light{
+  position: absolute;
+  left: 60px;
+  bottom: 200px;
+  width: 75px;
+  height: 75px;
+  &-off {
+    background-image: url('../../assets/images/red_led_off.png');
+  }
+  &-on {
+    background-image: url('../../assets/images/red_led_on.png');
+  }
+}
+
+.green-light{
+  position: absolute;
+  right: 60px;
+  bottom: 200px;
+  width: 89px;
+  height: 89px;
+  &-off {
+    background-image: url('../../assets/images/green_led_off.png');
+  }
+  &-on {
+    background-image: url('../../assets/images/green_led_on.png');
+  }
+}
+
+.own-board{
+  position: absolute;
+  left: 30px;
+  top: 40px;
+  width: 420px;
+  height: 80px;
+  background-image: url('../../assets/images/your_board.png');
+}
+
+.enemy-board{
+  position: absolute;
+  left: 170px;
+  top: 40px;
+  width: 420px;
+  height: 80px;
+  background-image: url('../../assets/images/enemy_board.png');
 }
