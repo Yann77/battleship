@@ -2,7 +2,7 @@
   <a mat-tab-link routerLink="/game-list">Games</a>
 </nav>
 <ng-container class="container" *ngIf="(startedGame$ | async) as startedGame">
-  <h2>{{getStatusMessage(startedGame)}}</h2>
+  <h2 [innerHTML]="getStatusMessage(startedGame)"></h2>
   <div class="d-flex">
     <div class="ui-kit-container">
       <div class="own-board"></div>

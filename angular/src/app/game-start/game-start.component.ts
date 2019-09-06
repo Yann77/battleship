@@ -39,7 +39,7 @@ export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
 
   getStatusMessage(startedGame: StartedGame) {
     if (!startedGame.guest) {
-      return 'Waiting for an opponent...';
+      return `<img width="420" src="../assets/images/waiting.png" alt="Waiting for player"/>`;
     }
     if (startedGame.status === GameStatus.ENDED) {
       const winnerName = this.getWinnerName(startedGame);

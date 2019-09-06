@@ -67,7 +67,7 @@
 .red-light{
   position: absolute;
   left: 60px;
-  bottom: 200px;
+  bottom: 205px;
   width: 75px;
   height: 75px;
   &-off {
@@ -82,8 +82,8 @@
   position: absolute;
   right: 60px;
   bottom: 200px;
-  width: 89px;
-  height: 89px;
+  width: 90px;
+  height: 90px;
   &-off {
     background-image: url('../../assets/images/green_led_off.png');
   }
@@ -95,7 +95,7 @@
 .own-board{
   position: absolute;
   left: 30px;
-  top: 40px;
+  top: 30px;
   width: 420px;
   height: 80px;
   background-image: url('../../assets/images/your_board.png');
@@ -104,7 +104,7 @@
 .enemy-board{
   position: absolute;
   left: 170px;
-  top: 40px;
+  top: 30px;
   width: 420px;
   height: 80px;
   background-image: url('../../assets/images/enemy_board.png');
