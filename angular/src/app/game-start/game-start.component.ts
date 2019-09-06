@@ -52,15 +52,15 @@ export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
       startedGame.guest.username + ' VS ' + startedGame.host.username;
   }
 
-  getLightClass(owner: boolean, gameStatus: GameStatus) {
+  getLightClass(asHost: boolean, owner: boolean, gameStatus: GameStatus) {
     if (owner) {
-      if (gameStatus === GameStatus.HOST) {
+      if (asHost && gameStatus === GameStatus.HOST) {
         return {'green-light-on': true};
       } else {
         return {'green-light-off': true};
       }
-    } else {
-      if (gameStatus === GameStatus.GUEST) {
+    } else if (!owner) {
+      if (!asHost && gameStatus === GameStatus.GUEST) {
         return {'red-light-on': true};
       } else {
         return {'red-light-off': true};

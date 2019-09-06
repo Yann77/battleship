@@ -13,7 +13,7 @@
       <div class="speaker">
         <img width="150" src="../assets/images/speaker.png" alt="Speaker"/>
       </div>
-      <div class="green-light" [ngClass]="getLightClass(true, startedGame.status)"></div>
+      <div class="green-light" [ngClass]="getLightClass(asHost, true, startedGame.status)"></div>
     </div>
     <div class="ui-kit-container">
       <div class="enemy-board"></div>
@@ -23,7 +23,7 @@
       <div class="radar">
         <img width="150" src="../assets/images/radar.png" alt="Radar"/>
       </div>
-      <div class="red-light" [ngClass]="getLightClass(false, startedGame.status)"></div>
+      <div class="red-light" [ngClass]="getLightClass(asHost, false, startedGame.status)"></div>
     </div>
   </div>
 

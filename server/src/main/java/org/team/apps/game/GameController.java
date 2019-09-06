@@ -23,7 +23,7 @@ public class GameController {
 	private GameService gameService;
 
 	@MessageMapping("/game/create")
-	@SendToUser("/topic/game/created")
+	@SendTo("/topic/game/created")
 	public Game create(String username) {
 		logger.info(String.format("Creating a game for: [%s]", username));
 		return gameService.create(username);
