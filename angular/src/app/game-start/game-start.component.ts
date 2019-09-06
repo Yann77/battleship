@@ -53,19 +53,30 @@ export class GameStartComponent extends TakeUntilDestroyed implements OnInit {
   }
 
   getLightClass(asHost: boolean, owner: boolean, gameStatus: GameStatus) {
-    if (owner) {
+    if(owner){
       if (asHost && gameStatus === GameStatus.HOST) {
         return {'green-light-on': true};
-      } else {
+      } else if (asHost && gameStatus === GameStatus.GUEST) {
         return {'green-light-off': true};
       }
-    } else if (!owner) {
       if (!asHost && gameStatus === GameStatus.GUEST) {
+        return {'green-light-on': true};
+      } else if (!asHost && gameStatus === GameStatus.HOST) {
+        return {'green-light-off': true};
+      }
+    }else{
+      if (asHost && gameStatus === GameStatus.GUEST) {
         return {'red-light-on': true};
-      } else {
+      } else if (asHost && gameStatus === GameStatus.HOST) {
+        return {'red-light-off': true};
+      }
+      if (!asHost && gameStatus === GameStatus.HOST) {
+        return {'red-light-on': true};
+      } else if (!asHost && gameStatus === GameStatus.GUEST) {
         return {'red-light-off': true};
       }
     }
+
   }
 
   private getWinnerName(startedGame: StartedGame) {
