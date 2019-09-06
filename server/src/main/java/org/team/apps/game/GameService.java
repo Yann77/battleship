@@ -91,8 +91,6 @@ public class GameService {
 		Board boardAttacked = null;
 		String newGameStatus = game.getStatus();
 
-		System.out.println(game);
-
 		switch (game.getStatus()) {
 		case "HOST":
 			boardAttacked = game.getGuest();
@@ -113,8 +111,6 @@ public class GameService {
 		if (boardAttacked != null && boardAttacked.getCellList().stream().filter(boardCell -> boardCell.getTouched()).count() == ALL_BOATS_HIT) {
 			newGameStatus = GameStatus.ENDED.name();
 		}
-
-		System.out.println(game);
 
 		game.setStatus(newGameStatus);
 
